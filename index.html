@@ -531,7 +531,7 @@ const SMB_FB_ROOT = 'smb_escape_rooms';
 const LOCKS=[
   {id:1,type:"text",icon:"🚩",title:"Señales de Cubierta",sub:"Prueba 1 — Cuaderno de bitácora",story:"El capitán dejó cinco banderas en el cuaderno (Prueba 1). Cada una es una letra del Código Internacional de Señales. Consultad la ilustración y leedlas de izquierda a derecha.",h1:"Cada bandera náutica es una letra. Leedlas de izquierda a derecha.",h2:"Las banderas forman una palabra relacionada con el mar.",h3:"Sustantivo marino de 5 letras. Primera letra: N.",answer:"NAVES",len:5,success:"¡El sistema reconoce vuestra señal! Primera barrera superada.",color:"#0252CD"},
   {id:2,type:"number",icon:"🍾",title:"El Mensaje de las Botellas",sub:"Prueba 2 — Cuaderno de bitácora",story:"En el cuaderno (Prueba 2) hay botellas colgadas con etiquetas. Solo importan los dos colores del colegio (carmesí del escudo y azul marino de la vela). Comparad la altura de cada una y leed los números de sus etiquetas.",h1:"Solo las botellas del carmesí del escudo y del azul marino.",h2:"En cada tono, fijaos en cuál es más alta y cuál más baja.",h3:"Cuatro cifras en total. La más alta del azul marino lleva un 3 en la etiqueta.",answer:"3119",len:4,success:"¡Coordenadas del mástil confirmadas! Segunda barrera superada.",color:"#1b6ca8"},
-  {id:3,type:"number",icon:"🪢",title:"Los Nudos del Contramaestre",sub:"Prueba 3 — Cuaderno de bitácora",story:"El contramaestre dibujó un cabo con nudos en el cuaderno (Prueba 3). Nudo llano ×1, nudo de ocho ×2, ballestrinque ×3. Multiplicad cantidad por valor y sumad todo.",h1:"Zonas: A (llanos ×1), B (de ocho ×2), C (ballestrinques ×3).",h2:"Contad cuántos hay de cada tipo y multiplicad.",h3:"2×1 + 4×2 + 6×3 = 28.",answer:"28",len:2,success:"¡El contramaestre libre! Tercera barrera vencida.",color:"#2d6a4f"},
+  {id:3,type:"number",icon:"🪢",title:"Los Nudos del Contramaestre",sub:"Prueba 3 — Cuaderno de bitácora",story:"En el cuaderno (Prueba 3) hay una driza con seis banderines y un cuadro de referencia. Cada nudo tiene una operación. Identificad los seis nudos de izquierda a derecha y aplicad cada operación en orden sobre el número 10.",h1:"Usad el cuadro de nudos del cuaderno para reconocer cada uno.",h2:"Empezad en 10. Aplicad las seis operaciones, una tras otra, de izquierda a derecha.",h3:"El resultado final son dos cifras (pista: termina en 4).",answer:"28",len:2,success:"¡El contramaestre libre! Tercera barrera vencida.",color:"#2d6a4f"},
   {id:4,type:"direction",icon:"🧭",title:"La Ruta de la Brújula",sub:"Prueba 4 — Cuaderno de bitácora",story:"Seguid la ruta en el cuaderno (Prueba 4): 3N, 2E, 1S, 1O desde el origen.\n¿En qué punto cardinal estáis respecto al inicio?",h1:"Dibujad los movimientos en la cuadrícula del cuaderno.",h2:"Estáis al norte Y al este del punto inicial.",h3:"Dirección noreste: NE.",answer:"NE",len:2,success:"¡Posición detectada! Cuarta barrera superada.",color:"#6b4226",dirs:["N","NE","E","SE","S","SO","O","NO"],aliases:{NORESTE:"NE",NORDESTE:"NE",NOROESTE:"NO",SURESTE:"SE",SUROESTE:"SO",NORTE:"N",SUR:"S",ESTE:"E",OESTE:"O"}},
   {id:5,type:"text",icon:"🗺️",title:"Las Escalas Secretas",sub:"Prueba 5 — Cuaderno de bitácora",story:"En el mapa del cuaderno (Prueba 5) hay tres marcas con coordenadas: 40°N/4°O, 51°N/0°, 48°N/2°E.\nLeed las letras de mayor a menor latitud.",h1:"Tres marcas en el mapa del cuaderno.",h2:"Ordenad: 51°N, 48°N, 40°N.",h3:"Tres letras. Empieza por M.",answer:"MAR",len:3,success:"¡Coordenadas confirmadas! Quinta barrera eliminada.",color:"#1b4f72"},
   {id:6,type:"text",icon:"📡",title:"El Telégrafo del Capitán",sub:"Prueba 6 — Cuaderno de bitácora",story:"El radio-operador dejó el mensaje en el cuaderno (Prueba 6), en código Morse:",h1:"Cada grupo separado por espacio es una letra.",h2:"Los primeros grupos son N, E, P.",h3:"Nombre del dios romano del mar (7 letras).",answer:"NEPTUNO",len:7,success:"¡El dios del mar guía al Santa María! Sexta barrera destruida.",color:"#0b3d91",morse:"-. . .--. - ..- -. ---"},
@@ -675,6 +675,9 @@ function renderDeckFlagsImage(container){
 }
 function renderBotellasImage(container){
   renderLockClueImage(container,'── Botellas colgadas (prueba 2) ──','img/02botellas.png','Nueve botellas con etiquetas: colores del colegio, carmesí del escudo y azul marino de la vela');
+}
+function renderNudosImage(container){
+  renderLockClueImage(container,'── Driza de banderines con nudos (prueba 3) ──','img/03nudos.png','Seis banderines con nudos marineros de izquierda a derecha');
 }
 function openBitacora(){
   if(typeof sfxClick==='function')sfxClick();
@@ -887,6 +890,7 @@ function renderLock(){
   $('extra').innerHTML='';
   if(l.id===1)renderDeckFlagsImage($('extra'));
   if(l.id===2)renderBotellasImage($('extra'));
+  if(l.id===3)renderNudosImage($('extra'));
   if(!isSolved&&!isLocked)renderKeypad(l);
   if(l.morse&&!isLocked)renderMorse(l.morse);
   $('prev-btn').disabled=cur===0;$('next-btn').disabled=cur===LOCKS.length-1;
