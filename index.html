@@ -530,7 +530,7 @@ const SMB_FB_ROOT = 'smb_escape_rooms';
 // ══ DATA ════════════════════════════════════════
 const LOCKS=[
   {id:1,type:"text",icon:"🚩",title:"Señales de Cubierta",sub:"Prueba 1 — Cuaderno de bitácora",story:"El capitán dejó cinco banderas en el cuaderno (Prueba 1). Cada una es una letra del Código Internacional de Señales. Consultad la ilustración y leedlas de izquierda a derecha.",h1:"Cada bandera náutica es una letra. Leedlas de izquierda a derecha.",h2:"Las banderas forman una palabra relacionada con el mar.",h3:"Sustantivo marino de 5 letras. Primera letra: N.",answer:"NAVES",len:5,success:"¡El sistema reconoce vuestra señal! Primera barrera superada.",color:"#0252CD"},
-  {id:2,type:"number",icon:"🍾",title:"El Mensaje de las Botellas",sub:"Prueba 2 — Cuaderno de bitácora",story:"En el cuaderno (Prueba 2) hay botellas con etiquetas. Solo importan las ROJAS y AZULES: ordénalas de mayor a menor altura y leed sus números en ese orden.",h1:"Solo botellas ROJAS y AZULES.",h2:"Las rojas (alto a bajo) dan las dos primeras cifras, las azules las dos últimas.",h3:"Rojas: 3 y 1. Azules: 1 y 9. Código: 3119.",answer:"3119",len:4,success:"¡Coordenadas del mástil confirmadas! Segunda barrera superada.",color:"#1b6ca8"},
+  {id:2,type:"number",icon:"🍾",title:"El Mensaje de las Botellas",sub:"Prueba 2 — Cuaderno de bitácora",story:"En el cuaderno (Prueba 2) hay botellas colgadas con etiquetas. Solo importan los dos colores del colegio (carmesí del escudo y azul marino de la vela). Comparad la altura de cada una y leed los números de sus etiquetas.",h1:"Solo las botellas del carmesí del escudo y del azul marino.",h2:"En cada tono, fijaos en cuál es más alta y cuál más baja.",h3:"Cuatro cifras en total. La más alta del azul marino lleva un 3 en la etiqueta.",answer:"3119",len:4,success:"¡Coordenadas del mástil confirmadas! Segunda barrera superada.",color:"#1b6ca8"},
   {id:3,type:"number",icon:"🪢",title:"Los Nudos del Contramaestre",sub:"Prueba 3 — Cuaderno de bitácora",story:"El contramaestre dibujó un cabo con nudos en el cuaderno (Prueba 3). Nudo llano ×1, nudo de ocho ×2, ballestrinque ×3. Multiplicad cantidad por valor y sumad todo.",h1:"Zonas: A (llanos ×1), B (de ocho ×2), C (ballestrinques ×3).",h2:"Contad cuántos hay de cada tipo y multiplicad.",h3:"2×1 + 4×2 + 6×3 = 28.",answer:"28",len:2,success:"¡El contramaestre libre! Tercera barrera vencida.",color:"#2d6a4f"},
   {id:4,type:"direction",icon:"🧭",title:"La Ruta de la Brújula",sub:"Prueba 4 — Cuaderno de bitácora",story:"Seguid la ruta en el cuaderno (Prueba 4): 3N, 2E, 1S, 1O desde el origen.\n¿En qué punto cardinal estáis respecto al inicio?",h1:"Dibujad los movimientos en la cuadrícula del cuaderno.",h2:"Estáis al norte Y al este del punto inicial.",h3:"Dirección noreste: NE.",answer:"NE",len:2,success:"¡Posición detectada! Cuarta barrera superada.",color:"#6b4226",dirs:["N","NE","E","SE","S","SO","O","NO"],aliases:{NORESTE:"NE",NORDESTE:"NE",NOROESTE:"NO",SURESTE:"SE",SUROESTE:"SO",NORTE:"N",SUR:"S",ESTE:"E",OESTE:"O"}},
   {id:5,type:"text",icon:"🗺️",title:"Las Escalas Secretas",sub:"Prueba 5 — Cuaderno de bitácora",story:"En el mapa del cuaderno (Prueba 5) hay tres marcas con coordenadas: 40°N/4°O, 51°N/0°, 48°N/2°E.\nLeed las letras de mayor a menor latitud.",h1:"Tres marcas en el mapa del cuaderno.",h2:"Ordenad: 51°N, 48°N, 40°N.",h3:"Tres letras. Empieza por M.",answer:"MAR",len:3,success:"¡Coordenadas confirmadas! Quinta barrera eliminada.",color:"#1b4f72"},
@@ -666,10 +666,15 @@ function bitacoraUrl(){
 function assetUrl(path){
   try{return new URL(path,window.location.href).href;}catch(e){return path;}
 }
-function renderDeckFlagsImage(container){
+function renderLockClueImage(container,label,src,alt){
   if(!container)return;
-  const src=assetUrl('img/01banderas.png');
-  container.innerHTML='<div class="deck-flags-img-lbl">── Banderas del mensaje (izquierda → derecha) ──</div><div class="deck-flags-img-wrap"><img src="'+src+'" alt="Cinco banderas náuticas en orden: November, Alfa, Victor, Echo, Sierra" width="520" height="auto" loading="lazy" decoding="async"></div>';
+  container.innerHTML='<div class="deck-flags-img-lbl">'+label+'</div><div class="deck-flags-img-wrap"><img src="'+assetUrl(src)+'" alt="'+alt+'" width="520" height="auto" loading="lazy" decoding="async"></div>';
+}
+function renderDeckFlagsImage(container){
+  renderLockClueImage(container,'── Banderas del mensaje (izquierda → derecha) ──','img/01banderas.png','Cinco banderas náuticas en orden: November, Alfa, Victor, Echo, Sierra');
+}
+function renderBotellasImage(container){
+  renderLockClueImage(container,'── Botellas colgadas (prueba 2) ──','img/02botellas.png','Nueve botellas con etiquetas: colores del colegio, carmesí del escudo y azul marino de la vela');
 }
 function openBitacora(){
   if(typeof sfxClick==='function')sfxClick();
@@ -881,6 +886,7 @@ function renderLock(){
   $('hints-list').innerHTML='';$('hints-left').textContent=3;$('hint-btn').style.display='';$('hint-n').textContent=1;
   $('extra').innerHTML='';
   if(l.id===1)renderDeckFlagsImage($('extra'));
+  if(l.id===2)renderBotellasImage($('extra'));
   if(!isSolved&&!isLocked)renderKeypad(l);
   if(l.morse&&!isLocked)renderMorse(l.morse);
   $('prev-btn').disabled=cur===0;$('next-btn').disabled=cur===LOCKS.length-1;
