@@ -94,6 +94,9 @@ input.shaking{animation:shake .45s ease;border-color:#e74c3c !important;box-shad
 #lock-icon-box{width:clamp(48px,5vw,58px) !important;height:clamp(48px,5vw,58px) !important;font-size:clamp(1.35rem,2vw,1.65rem) !important;}
 #lock-title{font-size:clamp(1.25rem,2vw,1.65rem) !important;}
 #lock-story{font-size:clamp(.95rem,1vw,1.1rem) !important;line-height:1.85 !important;}
+.deck-flags-img-wrap{padding:clamp(10px,1.5vw,14px);background:#08111e;border:1px solid #1a2e4a;border-radius:9px;margin-bottom:11px;text-align:center;}
+.deck-flags-img-wrap img{max-width:min(100%,520px);width:100%;height:auto;border-radius:6px;display:block;margin:0 auto;}
+.deck-flags-img-lbl{font-size:8px;color:#4a6a8a;font-family:monospace;margin-bottom:8px;letter-spacing:2px;text-transform:uppercase;}
 #lock-sub,.lock-meta{font-size:.75rem !important;}
 #solved-badge,#locked-badge{font-size:.7rem !important;padding:2px 8px !important;}
 #hints-panel{padding:14px 18px !important;}
@@ -660,6 +663,14 @@ function closeLeaderboard(){$('lb-panel').style.display='none';$('lb-overlay').s
 function bitacoraUrl(){
   try{return new URL('bitacora.html',window.location.href).href;}catch(e){return'bitacora.html';}
 }
+function assetUrl(path){
+  try{return new URL(path,window.location.href).href;}catch(e){return path;}
+}
+function renderDeckFlagsImage(container){
+  if(!container)return;
+  const src=assetUrl('img/01banderas.png');
+  container.innerHTML='<div class="deck-flags-img-lbl">── Banderas del mensaje (izquierda → derecha) ──</div><div class="deck-flags-img-wrap"><img src="'+src+'" alt="Cinco banderas náuticas en orden: November, Alfa, Victor, Echo, Sierra" width="520" height="auto" loading="lazy" decoding="async"></div>';
+}
 function openBitacora(){
   if(typeof sfxClick==='function')sfxClick();
   const o=$('bitacora-overlay'),f=$('bitacora-frame');
@@ -869,6 +880,7 @@ function renderLock(){
   $('hints-panel').style.flexDirection='column';
   $('hints-list').innerHTML='';$('hints-left').textContent=3;$('hint-btn').style.display='';$('hint-n').textContent=1;
   $('extra').innerHTML='';
+  if(l.id===1)renderDeckFlagsImage($('extra'));
   if(!isSolved&&!isLocked)renderKeypad(l);
   if(l.morse&&!isLocked)renderMorse(l.morse);
   $('prev-btn').disabled=cur===0;$('next-btn').disabled=cur===LOCKS.length-1;

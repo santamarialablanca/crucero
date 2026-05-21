@@ -309,6 +309,21 @@
     background: rgba(0,0,0,0.04);
   }
 
+  .flag-alphabet-full td { vertical-align: middle; }
+  .flag-alphabet-full td strong {
+    font-family: 'Special Elite', monospace;
+    font-size: 1.1em;
+    color: var(--navy);
+  }
+  .bib-ref-img {
+    display: block;
+    max-width: 100%;
+    width: min(100%, 720px);
+    height: auto;
+    margin: 0 auto;
+    border-radius: 4px;
+  }
+
   .morse-table {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(4.25rem, 1fr));
@@ -718,15 +733,15 @@
       <div class="handwritten" style="font-size: 14px; line-height: 1.9; color: var(--ink);">
         <p>Día 3 de travesía. Hora: 03:47.</p>
         <br>
-        <p>El capitán Rodrigo Salamanca ha desaparecido de su camarote durante la noche. Con él, han desaparecido las claves de navegación del <em>Santa María la Blanca</em>. El barco navega sin rumbo hacia la Gran Tormenta del Atlántico Norte.</p>
+        <p>El capitán Carlos Amador ha desaparecido de su camarote durante la noche. Con él, han desaparecido las claves de navegación del <em>Santa María la Blanca</em>. El barco navega sin rumbo hacia la Gran Tormenta del Atlántico Norte.</p>
         <br>
         <p>Encontramos su última transmisión de radio, fragmentada e incompleta. También hallamos este cuaderno de bitácora, repleto de mensajes cifrados y pistas que solo un verdadero marino puede descifrar.</p>
         <br>
-        <p>Tenéis exactamente <strong>60 minutos</strong> antes de que el barco entre en aguas imposibles. Debéis:</p>
+        <p>Tenéis exactamente <strong>40 minutos</strong> antes de que el barco entre en aguas imposibles. Debéis:</p>
       </div>
       <div class="clue-box" style="margin-top: 8px;">
         <div class="typed" style="font-size: 12px; line-height: 1.8;">
-          ☑ Prueba 1 — Banderas náuticas (pista en esta bitácora)<br>
+          ☑ Prueba 1 — Banderas náuticas<br>
           ☑ Prueba 2 — Botellas con etiquetas<br>
           ☑ Prueba 3 — Cabo con nudos<br>
           ☑ Prueba 4 — Ruta de la brújula<br>
@@ -734,7 +749,7 @@
           ☑ Prueba 6 — Telégrafo en Morse<br>
           ☑ Prueba 7 — Banderines de colores<br>
           ☑ Prueba 8 — Diario cifrado<br>
-          ☑ Prueba 9 — Rueda del timonel (ROT13)<br>
+          ☑ Prueba 9 — Rueda del timonel<br>
           ☑ Prueba 10 — Señales de linterna
         </div>
       </div>
@@ -755,55 +770,23 @@
       <div class="handwritten" style="font-size: 13px; line-height: 1.8; margin: 10px 0;">
         El capitán Salamanca era fanático del lenguaje náutico. Antes de desaparecer, dejó registradas cinco banderas con un mensaje de socorro. No lo escribió en claro: lo cifró usando el Código Internacional de Señales.
       </div>
-      <div class="pista-visual">
-        <svg viewBox="0 0 420 72" width="420" height="72" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Cinco banderas náuticas en orden">
-          <rect width="420" height="72" fill="#e8d5b5" rx="3"/>
-          <g transform="translate(12,8)">
-            <rect x="0" y="0" width="68" height="52" fill="#fff" stroke="#1b2e4a" stroke-width="1.5"/>
-            <rect x="0" y="0" width="68" height="26" fill="#0252CD"/><rect x="0" y="26" width="68" height="26" fill="#fff"/>
-            <text x="34" y="64" text-anchor="middle" font-family="monospace" font-size="9" fill="#1a0e05">November · N</text>
-          </g>
-          <g transform="translate(88,8)">
-            <rect x="0" y="0" width="68" height="52" fill="#fff" stroke="#1b2e4a" stroke-width="1.5"/>
-            <polygon points="34,4 64,48 4,48" fill="#0252CD"/>
-            <text x="34" y="64" text-anchor="middle" font-family="monospace" font-size="9" fill="#1a0e05">Alfa · A</text>
-          </g>
-          <g transform="translate(164,8)">
-            <rect x="0" y="0" width="68" height="52" fill="#fff" stroke="#1b2e4a" stroke-width="1.5"/>
-            <line x1="34" y1="4" x2="34" y2="48" stroke="#c0392b" stroke-width="8"/>
-            <line x1="4" y1="26" x2="64" y2="26" stroke="#c0392b" stroke-width="8"/>
-            <text x="34" y="64" text-anchor="middle" font-family="monospace" font-size="9" fill="#1a0e05">Victor · V</text>
-          </g>
-          <g transform="translate(240,8)">
-            <rect x="0" y="0" width="68" height="52" fill="#fff" stroke="#1b2e4a" stroke-width="1.5"/>
-            <rect x="0" y="18" width="68" height="16" fill="#0252CD"/>
-            <text x="34" y="64" text-anchor="middle" font-family="monospace" font-size="9" fill="#1a0e05">Echo · E</text>
-          </g>
-          <g transform="translate(316,8)">
-            <rect x="0" y="0" width="68" height="52" fill="#0252CD" stroke="#1b2e4a" stroke-width="1.5"/>
-            <circle cx="22" cy="26" r="7" fill="#fff"/><circle cx="34" cy="26" r="7" fill="#fff"/><circle cx="46" cy="26" r="7" fill="#fff"/>
-            <text x="34" y="64" text-anchor="middle" font-family="monospace" font-size="9" fill="#1a0e05">Sierra · S</text>
-          </g>
-        </svg>
-        <div class="caption">Orden de izquierda a derecha → leed la letra de cada bandera.</div>
+      <div class="pista-visual" style="padding-bottom: 8px;">
+        <div class="caption" style="margin-bottom: 10px;">Mensaje del capitán — cinco banderas en orden (izquierda → derecha):</div>
+        <img class="bib-ref-img" src="img/01banderas.png" alt="Cinco banderas náuticas en orden: N, A, V, E, S" width="720" loading="lazy" decoding="async">
       </div>
       <div class="clue-box">
         <div class="section-label">Vuestro encargo</div>
         <div class="typed" style="font-size: 12px; margin-top: 8px;">
-          Consultad las 5 banderas de la ilustración, de izquierda a derecha.<br>
-          Cada bandera es una LETRA del alfabeto náutico.<br>
-          Leed las letras en orden y formad la palabra. Introducidla en el <strong>candado digital</strong> de la misión (texto, 5 letras).
+          Consultad las 5 banderas de la primera ilustración, de izquierda a derecha.<br>
+          Usad la tabla del alfabeto náutico para identificar cada letra.<br>
+          Formad la palabra e introducidla en el <strong>candado digital</strong> de la misión (texto, 5 letras).
         </div>
       </div>
-      <div class="heading-deco" style="margin-top: 12px;"><span></span><h3>REFERENCIA: ALFABETO NÁUTICO</h3><span></span></div>
-      <table class="flag-table">
-        <tr><th>Bandera</th><th>Letra</th><th>Descripción visual</th></tr>
-        <tr><td>Alfa</td><td>A</td><td>Cola de golondrina, azul y blanco</td></tr>
-        <tr><td>November</td><td>N</td><td>Damero azul y blanco</td></tr>
-        <tr><td>Victor</td><td>V</td><td>Cruz roja sobre blanco</td></tr>
-        <tr><td>Echo</td><td>E</td><td>Franja central azul</td></tr>
-        <tr><td>Sierra</td><td>S</td><td>3 círculos blancos sobre azul</td></tr>
-      </table>
+      <div class="heading-deco" style="margin-top: 12px;"><span></span><h3>ALFABETO NÁUTICO COMPLETO</h3><span></span></div>
+      <p class="typed" style="margin-bottom: 10px;">Código Internacional de Señales: correspondencia de letras (A–Z) y números (0–9) con cada bandera.</p>
+      <div class="pista-visual">
+        <img class="bib-ref-img" src="img/01alfabeto.png" alt="Tabla del alfabeto náutico y banderas numéricas del Código Internacional de Señales" width="720" loading="lazy" decoding="async">
+      </div>
       <div class="alert-box bib-candado-hint" style="margin-top: 12px;">⚓ Este cuaderno es solo de consulta. Las soluciones se introducen en los candados de la misión.</div>
       <div class="page-corner"></div>
       <span class="page-num">1</span>
