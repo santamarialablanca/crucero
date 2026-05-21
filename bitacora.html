@@ -214,6 +214,23 @@
     color: var(--ink-fade);
   }
 
+  .pista-visual {
+    background: var(--parchment-dark);
+    border: 1px dashed var(--border-worn);
+    border-radius: 4px;
+    padding: 12px;
+    margin: 10px 0;
+    text-align: center;
+  }
+
+  .pista-visual svg { max-width: 100%; height: auto; }
+  .pista-visual .caption {
+    font-family: 'Courier Prime', monospace;
+    font-size: 10px;
+    color: var(--ink-light);
+    margin-top: 8px;
+  }
+
   .morse-display {
     font-family: 'Courier Prime', monospace;
     font-size: 18px;
@@ -523,6 +540,26 @@
   .book-toolbar button:hover:not(:disabled) { background: var(--parchment); }
   .book-toolbar button:disabled { opacity: 0.35; cursor: not-allowed; }
   .book-toolbar button:focus-visible { outline: 2px solid var(--navy-light); outline-offset: 2px; }
+  .book-toolbar .btn-mision {
+    margin-left: auto;
+    background: var(--navy);
+    color: #e8d5b5;
+    border-color: var(--navy-light);
+    white-space: nowrap;
+  }
+  .book-toolbar .btn-mision:hover:not(:disabled) {
+    background: var(--navy-light);
+    color: #fff;
+  }
+  @media (max-width: 520px) {
+    .book-toolbar { flex-wrap: wrap; }
+    .book-toolbar .btn-mision {
+      margin-left: 0;
+      width: 100%;
+      order: -1;
+      text-align: center;
+    }
+  }
   #bib-counter {
     font-family: 'Courier Prime', monospace;
     font-size: 12px;
@@ -564,10 +601,11 @@
     <button type="button" class="tab-btn" data-page="11" onclick="showPage(11)">💡 P10 Señales</button>
     <button type="button" class="tab-btn" data-page="12" onclick="showPage(12)">📋 Respuestas</button>
   </div>
-  <div class="book-toolbar" role="navigation" aria-label="Pasar página">
+  <div class="book-toolbar" role="navigation" aria-label="Navegación del cuaderno">
     <button type="button" id="bib-prev" aria-label="Página anterior">◀ Anterior</button>
     <span id="bib-counter" aria-live="polite">1 / 13</span>
     <button type="button" id="bib-next" aria-label="Página siguiente">Siguiente ▶</button>
+    <button type="button" class="btn-mision" id="bib-volver" aria-label="Volver a la misión de candados">⚓ Volver a la misión</button>
   </div>
 
 
@@ -626,23 +664,23 @@
       </div>
       <div class="clue-box" style="margin-top: 8px;">
         <div class="typed" style="font-size: 12px; line-height: 1.8;">
-          ☑ Leer las banderas que ondean en cubierta<br>
-          ☑ Observar las botellas colgadas del mástil<br>
-          ☑ Contar los nudos del cabo de proa<br>
-          ☑ Seguir la ruta de la brújula<br>
-          ☑ Localizar las coordenadas en el mapa<br>
-          ☑ Descifrar el mensaje del telégrafo<br>
-          ☑ Leer los banderines del mástil de popa<br>
-          ☑ Descifrar el diario secreto del capitán<br>
-          ☑ Usar la rueda del timonel<br>
-          ☑ Interpretar las señales de la linterna
+          ☑ Prueba 1 — Banderas náuticas (pista en esta bitácora)<br>
+          ☑ Prueba 2 — Botellas con etiquetas<br>
+          ☑ Prueba 3 — Cabo con nudos<br>
+          ☑ Prueba 4 — Ruta de la brújula<br>
+          ☑ Prueba 5 — Mapa con coordenadas<br>
+          ☑ Prueba 6 — Telégrafo en Morse<br>
+          ☑ Prueba 7 — Banderines de colores<br>
+          ☑ Prueba 8 — Diario cifrado<br>
+          ☑ Prueba 9 — Rueda del timonel (ROT13)<br>
+          ☑ Prueba 10 — Señales de linterna
         </div>
       </div>
       <div class="alert-box">
-        ⚠ ATENCIÓN: Algunas pistas están FUERA del barco. Podréis salir a observarlas, pero NO tocar nada. Solo vuestros ojos son vuestras herramientas.
+        📖 Todas las pistas visuales están en las páginas de este cuaderno. Introducid cada código en los <strong>candados digitales</strong> de la misión (misma pestaña o dispositivo del equipo).
       </div>
       <div class="handwritten" style="font-size: 13px; color: var(--ink-fade); margin-top: 12px; font-style: italic;">
-        — Bitácora del Primer Oficial, Vicente Marcos
+        — Bitácora del Primer Oficial, Raquel Cuesta
       </div>
       <div class="page-corner"></div>
       <span class="page-num">II</span>
@@ -651,15 +689,47 @@
     <!-- PAGE 2: PRUEBA 1 BANDERAS -->
     <div class="page" id="page-2">
       <div class="heading-deco"><span></span><h3>PRUEBA 1 — SEÑALES DE CUBIERTA</h3><span></span></div>
-      <div class="alert-box">📍 SALID AL PASILLO → Buscad el panel de banderas náuticas en la pared de estribor (derecha)</div>
+      <div class="alert-box">📖 Pista visual en esta página — consultad la ilustración de abajo.</div>
       <div class="handwritten" style="font-size: 13px; line-height: 1.8; margin: 10px 0;">
-        El capitán Salamanca era fanático del lenguaje náutico. Antes de desaparecer, izó cinco banderas en cubierta con un mensaje de socorro. Pero no lo escribió en claro: lo cifró usando el Código Internacional de Señales.
+        El capitán Salamanca era fanático del lenguaje náutico. Antes de desaparecer, dejó registradas cinco banderas con un mensaje de socorro. No lo escribió en claro: lo cifró usando el Código Internacional de Señales.
+      </div>
+      <div class="pista-visual">
+        <svg viewBox="0 0 420 72" width="420" height="72" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Cinco banderas náuticas en orden">
+          <rect width="420" height="72" fill="#e8d5b5" rx="3"/>
+          <g transform="translate(12,8)">
+            <rect x="0" y="0" width="68" height="52" fill="#fff" stroke="#1b2e4a" stroke-width="1.5"/>
+            <rect x="0" y="0" width="68" height="26" fill="#0252CD"/><rect x="0" y="26" width="68" height="26" fill="#fff"/>
+            <text x="34" y="64" text-anchor="middle" font-family="monospace" font-size="9" fill="#1a0e05">November · N</text>
+          </g>
+          <g transform="translate(88,8)">
+            <rect x="0" y="0" width="68" height="52" fill="#fff" stroke="#1b2e4a" stroke-width="1.5"/>
+            <polygon points="34,4 64,48 4,48" fill="#0252CD"/>
+            <text x="34" y="64" text-anchor="middle" font-family="monospace" font-size="9" fill="#1a0e05">Alfa · A</text>
+          </g>
+          <g transform="translate(164,8)">
+            <rect x="0" y="0" width="68" height="52" fill="#fff" stroke="#1b2e4a" stroke-width="1.5"/>
+            <line x1="34" y1="4" x2="34" y2="48" stroke="#c0392b" stroke-width="8"/>
+            <line x1="4" y1="26" x2="64" y2="26" stroke="#c0392b" stroke-width="8"/>
+            <text x="34" y="64" text-anchor="middle" font-family="monospace" font-size="9" fill="#1a0e05">Victor · V</text>
+          </g>
+          <g transform="translate(240,8)">
+            <rect x="0" y="0" width="68" height="52" fill="#fff" stroke="#1b2e4a" stroke-width="1.5"/>
+            <rect x="0" y="18" width="68" height="16" fill="#0252CD"/>
+            <text x="34" y="64" text-anchor="middle" font-family="monospace" font-size="9" fill="#1a0e05">Echo · E</text>
+          </g>
+          <g transform="translate(316,8)">
+            <rect x="0" y="0" width="68" height="52" fill="#0252CD" stroke="#1b2e4a" stroke-width="1.5"/>
+            <circle cx="22" cy="26" r="7" fill="#fff"/><circle cx="34" cy="26" r="7" fill="#fff"/><circle cx="46" cy="26" r="7" fill="#fff"/>
+            <text x="34" y="64" text-anchor="middle" font-family="monospace" font-size="9" fill="#1a0e05">Sierra · S</text>
+          </g>
+        </svg>
+        <div class="caption">Orden de izquierda a derecha → leed la letra de cada bandera.</div>
       </div>
       <div class="clue-box">
         <div class="section-label">Vuestro encargo</div>
         <div class="typed" style="font-size: 12px; margin-top: 8px;">
-          Observad las 5 banderas náuticas colgadas en orden.<br>
-          Cada bandera representa una LETRA del alfabeto náutico.<br>
+          Consultad las 5 banderas de la ilustración, de izquierda a derecha.<br>
+          Cada bandera es una LETRA del alfabeto náutico.<br>
           Anotad las letras en orden y obtendréis la primera clave.
         </div>
       </div>
@@ -685,18 +755,47 @@
     <!-- PAGE 3: PRUEBA 2 BOTELLAS -->
     <div class="page" id="page-3">
       <div class="heading-deco"><span></span><h3>PRUEBA 2 — EL MENSAJE DE LAS BOTELLAS</h3><span></span></div>
-      <div class="alert-box">📍 SALID AL PASILLO → Buscad las botellas colgadas a distintas alturas en el mástil</div>
+      <div class="alert-box">📖 Pista visual en esta página — consultad el esquema de botellas.</div>
       <div class="handwritten" style="font-size: 13px; line-height: 1.8; margin: 10px 0;">
-        En su locura, el capitán colgó botellas con mensajes. Cada botella lleva líquido de color y una etiqueta con un número. Pero solo cuentan las que él consideraba "importantes": las de los colores de la bandera de emergencia.
+        En su locura, el capitán anotó botellas con mensajes. Cada una lleva líquido de color y una etiqueta con un número. Solo cuentan las de los colores de la bandera de emergencia: rojas y azules.
+      </div>
+      <div class="pista-visual">
+        <svg viewBox="0 0 320 140" width="320" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Botellas rojas y azules con alturas y números">
+          <line x1="160" y1="8" x2="160" y2="120" stroke="#8b6914" stroke-width="2" stroke-dasharray="4 3"/>
+          <text x="168" y="20" font-family="monospace" font-size="9" fill="#7a5c40">altura</text>
+          <g transform="translate(24,20)">
+            <rect x="18" y="70" width="28" height="42" rx="4" fill="#c0392b" opacity=".85"/>
+            <text x="32" y="58" text-anchor="middle" font-family="monospace" font-size="11" font-weight="bold" fill="#1a0e05">3</text>
+            <text x="32" y="128" text-anchor="middle" font-size="9" fill="#7a5c40">90 cm</text>
+            <text x="32" y="8" text-anchor="middle" font-size="9" fill="#c0392b">ROJA</text>
+          </g>
+          <g transform="translate(88,48)">
+            <rect x="18" y="42" width="28" height="70" rx="4" fill="#c0392b" opacity=".85"/>
+            <text x="32" y="30" text-anchor="middle" font-family="monospace" font-size="11" font-weight="bold" fill="#1a0e05">1</text>
+            <text x="32" y="128" text-anchor="middle" font-size="9" fill="#7a5c40">60 cm</text>
+          </g>
+          <g transform="translate(168,28)">
+            <rect x="18" y="62" width="28" height="50" rx="4" fill="#1b6ca8" opacity=".9"/>
+            <text x="32" y="50" text-anchor="middle" font-family="monospace" font-size="11" font-weight="bold" fill="#1a0e05">1</text>
+            <text x="32" y="128" text-anchor="middle" font-size="9" fill="#7a5c40">80 cm</text>
+            <text x="32" y="8" text-anchor="middle" font-size="9" fill="#1b6ca8">AZUL</text>
+          </g>
+          <g transform="translate(232,56)">
+            <rect x="18" y="56" width="28" height="56" rx="4" fill="#1b6ca8" opacity=".9"/>
+            <text x="32" y="44" text-anchor="middle" font-family="monospace" font-size="11" font-weight="bold" fill="#1a0e05">9</text>
+            <text x="32" y="128" text-anchor="middle" font-size="9" fill="#7a5c40">50 cm</text>
+          </g>
+        </svg>
+        <div class="caption">Solo rojas y azules. Ordenad por altura (mayor → menor) y leed las etiquetas.</div>
       </div>
       <div class="clue-box">
         <div class="section-label">Instrucciones</div>
         <div class="typed" style="font-size: 12px; margin-top: 8px; line-height: 1.7;">
-          1. Observad todas las botellas colgadas<br>
-          2. Anotad el número de la etiqueta de cada botella ROJA<br>
-          3. Ordenadlas de mayor a menor altura → ese es vuestro primer número<br>
-          4. Haced lo mismo con las botellas AZULES → segundo número<br>
-          5. Juntad ambos números → obtenéis el código del candado
+          1. Mirad el esquema de botellas de arriba<br>
+          2. Anotad el número de cada botella ROJA<br>
+          3. Ordenadlas de mayor a menor altura → primeras dos cifras<br>
+          4. Haced lo mismo con las AZULES → dos últimas cifras<br>
+          5. Juntad las cuatro cifras → código del candado
         </div>
       </div>
       <div class="heading-deco" style="margin-top: 10px;"><span></span><h3>ANOTAD AQUÍ</h3><span></span></div>
@@ -722,9 +821,9 @@
     <!-- PAGE 4: PRUEBA 3 NUDOS -->
     <div class="page" id="page-4">
       <div class="heading-deco"><span></span><h3>PRUEBA 3 — EL CABO DE LOS NUDOS</h3><span></span></div>
-      <div class="alert-box">📍 SALID AL PASILLO → Buscad la cuerda con nudos extendida en la pared de babor (izquierda)</div>
+      <div class="alert-box">📖 Pista visual en esta página — consultad el cabo con nudos.</div>
       <div class="handwritten" style="font-size: 13px; line-height: 1.8; margin: 10px 0;">
-        El contramaestre dejó un cabo con nudos antes de ser encerrado en bodega. Cada tipo de nudo tiene un valor secreto. Calculad el número total siguiendo su fórmula.
+        El contramaestre dibujó un cabo con nudos en esta bitácora. Cada tipo de nudo tiene un valor secreto. Calculad el número total siguiendo su fórmula.
       </div>
       <div class="clue-box">
         <div class="section-label">Fórmula del contramaestre</div>
@@ -734,6 +833,28 @@
           <tr><td>Nudo de ocho</td><td>× 2</td><td>Forma de número 8</td></tr>
           <tr><td>Ballestrinque</td><td>× 3</td><td>Dos vueltas cruzadas</td></tr>
         </table>
+      </div>
+      <div class="pista-visual">
+        <svg viewBox="0 0 360 56" width="360" height="56" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Cabo con nudos en tres zonas">
+          <line x1="8" y1="28" x2="352" y2="28" stroke="#8b6914" stroke-width="5" stroke-linecap="round"/>
+          <text x="52" y="14" text-anchor="middle" font-family="monospace" font-size="9" fill="#1b2e4a">Zona A</text>
+          <text x="52" y="50" text-anchor="middle" font-size="10" fill="#1a0e05">2 × llano</text>
+          <circle cx="36" cy="28" r="6" fill="none" stroke="#1a0e05" stroke-width="2"/><circle cx="68" cy="28" r="6" fill="none" stroke="#1a0e05" stroke-width="2"/>
+          <text x="180" y="14" text-anchor="middle" font-family="monospace" font-size="9" fill="#1b2e4a">Zona B</text>
+          <text x="180" y="50" text-anchor="middle" font-size="10" fill="#1a0e05">4 × de ocho</text>
+          <ellipse cx="148" cy="28" rx="7" ry="9" fill="none" stroke="#1a0e05" stroke-width="2"/>
+          <ellipse cx="168" cy="28" rx="7" ry="9" fill="none" stroke="#1a0e05" stroke-width="2"/>
+          <ellipse cx="192" cy="28" rx="7" ry="9" fill="none" stroke="#1a0e05" stroke-width="2"/>
+          <ellipse cx="212" cy="28" rx="7" ry="9" fill="none" stroke="#1a0e05" stroke-width="2"/>
+          <text x="292" y="14" text-anchor="middle" font-family="monospace" font-size="9" fill="#1b2e4a">Zona C</text>
+          <text x="292" y="50" text-anchor="middle" font-size="10" fill="#1a0e05">6 × ballestrinque</text>
+          <g stroke="#1a0e05" stroke-width="2" fill="none">
+            <path d="M258 22 Q268 34 258 34 Q248 34 258 22"/><path d="M278 22 Q288 34 278 34 Q268 34 278 22"/>
+            <path d="M298 22 Q308 34 298 34 Q288 34 298 22"/><path d="M318 22 Q328 34 318 34 Q308 34 318 22"/>
+            <path d="M328 22 Q338 34 328 34"/><path d="M338 22 Q348 34 338 34"/>
+          </g>
+        </svg>
+        <div class="caption">Contad por zona, multiplicad por el valor y sumad todo.</div>
       </div>
       <div class="heading-deco" style="margin-top: 10px;"><span></span><h3>ANOTAD AQUÍ</h3><span></span></div>
       <div class="typed" style="font-size: 12px; line-height: 2;">
@@ -804,12 +925,36 @@
     <!-- PAGE 6: PRUEBA 5 MAPA -->
     <div class="page" id="page-6">
       <div class="heading-deco"><span></span><h3>PRUEBA 5 — LAS ESCALAS SECRETAS</h3><span></span></div>
-      <div class="alert-box">📍 SALID AL PASILLO → Buscad el mapamundi en gran formato pegado en la pared del fondo</div>
+      <div class="alert-box">📖 Pista visual en esta página — consultad el mapa con las tres marcas.</div>
       <div class="handwritten" style="font-size: 13px; line-height: 1.8; margin: 10px 0;">
-        El capitán marcó tres escalas secretas en el mapa. Cada una tiene una letra. Debéis localizar las coordenadas, identificar los puertos y leer las letras de mayor a menor latitud (de arriba a abajo en el mapa).
+        El capitán marcó tres escalas secretas en el mapa del cuaderno. Cada marca tiene una letra. Localizad las coordenadas y leed las letras de mayor a menor latitud (de norte a sur).
+      </div>
+      <div class="pista-visual">
+        <svg viewBox="0 0 280 120" width="280" height="120" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Mapa con tres marcas y letras">
+          <rect width="280" height="120" fill="#d4e6f1" rx="4" stroke="#1b2e4a" stroke-width="1"/>
+          <text x="8" y="14" font-size="8" fill="#7a5c40" font-family="monospace">Atlántico N.</text>
+          <line x1="40" y1="100" x2="260" y2="100" stroke="#1b2e4a" stroke-width=".5"/>
+          <line x1="40" y1="20" x2="40" y2="100" stroke="#1b2e4a" stroke-width=".5"/>
+          <g transform="translate(120,28)">
+            <line x1="0" y1="0" x2="12" y2="12" stroke="#c0392b" stroke-width="2"/><line x1="12" y1="0" x2="0" y2="12" stroke="#c0392b" stroke-width="2"/>
+            <text x="18" y="10" font-family="Georgia,serif" font-size="14" font-weight="bold" fill="#1a0e05">M</text>
+            <text x="-4" y="24" font-size="8" font-family="monospace" fill="#4a3828">51°N 0°</text>
+          </g>
+          <g transform="translate(200,52)">
+            <line x1="0" y1="0" x2="12" y2="12" stroke="#c0392b" stroke-width="2"/><line x1="12" y1="0" x2="0" y2="12" stroke="#c0392b" stroke-width="2"/>
+            <text x="18" y="10" font-family="Georgia,serif" font-size="14" font-weight="bold" fill="#1a0e05">A</text>
+            <text x="-4" y="24" font-size="8" font-family="monospace" fill="#4a3828">48°N 2°E</text>
+          </g>
+          <g transform="translate(72,78)">
+            <line x1="0" y1="0" x2="12" y2="12" stroke="#c0392b" stroke-width="2"/><line x1="12" y1="0" x2="0" y2="12" stroke="#c0392b" stroke-width="2"/>
+            <text x="18" y="10" font-family="Georgia,serif" font-size="14" font-weight="bold" fill="#1a0e05">R</text>
+            <text x="-8" y="24" font-size="8" font-family="monospace" fill="#4a3828">40°N 4°O</text>
+          </g>
+        </svg>
+        <div class="caption">Ordenad las letras por latitud: mayor → menor (51°N, luego 48°N, luego 40°N).</div>
       </div>
       <div class="clue-box">
-        <div class="section-label">Coordenadas a buscar</div>
+        <div class="section-label">Coordenadas del mapa</div>
         <table class="coords-table" style="margin-top: 8px;">
           <tr><th>Coordenadas</th><th>Letra marcada</th><th>Lugar aproximado</th></tr>
           <tr><td>40°N / 4°O</td><td>____</td><td>Península Ibérica</td></tr>
@@ -878,7 +1023,7 @@
     <!-- PAGE 8: PRUEBA 7 BANDERINES -->
     <div class="page" id="page-8">
       <div class="heading-deco"><span></span><h3>PRUEBA 7 — LOS BANDERINES DEL MÁSTIL</h3><span></span></div>
-      <div class="alert-box">📍 SALID AL PASILLO → Buscad la tira de banderines triangulares de colores colgada en el techo o la pared</div>
+      <div class="alert-box">📖 Pista visual en esta página — consultad la tira de banderines.</div>
       <div class="handwritten" style="font-size: 13px; line-height: 1.8; margin: 10px 0;">
         Los banderines están ordenados con un mensaje numérico oculto. El código de colores es secreto: solo los cadetes más perspicaces lo conocen.
       </div>
@@ -890,10 +1035,27 @@
           🟡 Amarillo = <strong>3</strong>
         </div>
       </div>
+      <div class="pista-visual">
+        <svg viewBox="0 0 400 48" width="400" height="48" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Diez banderines numerados del uno al diez">
+          <g font-family="monospace" font-size="8" fill="#7a5c40">
+            <text x="12" y="44" text-anchor="middle">1</text><text x="52" y="44" text-anchor="middle">2</text>
+            <text x="92" y="44" text-anchor="middle">3</text><text x="132" y="44" text-anchor="middle">4</text>
+            <text x="172" y="44" text-anchor="middle">5</text><text x="212" y="44" text-anchor="middle">6</text>
+            <text x="252" y="44" text-anchor="middle">7</text><text x="292" y="44" text-anchor="middle">8</text>
+            <text x="332" y="44" text-anchor="middle">9</text><text x="372" y="44" text-anchor="middle">10</text>
+          </g>
+          <polygon points="12,36 20,8 28,36" fill="#c0392b"/><polygon points="52,36 60,8 68,36" fill="#1b6ca8"/>
+          <polygon points="92,36 100,8 108,36" fill="#f1c40f"/><polygon points="132,36 140,8 148,36" fill="#c0392b"/>
+          <polygon points="172,36 180,8 188,36" fill="#f1c40f"/><polygon points="212,36 220,8 228,36" fill="#c0392b"/>
+          <polygon points="252,36 260,8 268,36" fill="#f1c40f"/><polygon points="292,36 300,8 308,36" fill="#1b6ca8"/>
+          <polygon points="332,36 340,8 348,36" fill="#c0392b"/><polygon points="372,36 380,8 388,36" fill="#f1c40f"/>
+        </svg>
+        <div class="caption">Posiciones impares (1, 3, 5, 7, 9) → traducid color a número.</div>
+      </div>
       <div class="clue-box" style="margin-top: 8px;">
         <div class="section-label">Instrucciones</div>
         <div class="typed" style="font-size: 12px; margin-top: 8px; line-height: 1.8;">
-          Hay 10 banderines en total numerados del 1 al 10.<br>
+          Hay 10 banderines en la ilustración, numerados del 1 al 10.<br>
           Tomad SOLO los que están en posición IMPAR (1º, 3º, 5º, 7º, 9º).<br>
           Traducid cada uno a su número según el código de colores.<br>
           Escribidlos en orden → ese es vuestro código.
@@ -1076,7 +1238,7 @@
     </div>
 
   </div>
-  <div class="bib-footer">✦ COLEGIO SANTA MARÍA LA BLANCA · MADRID · S.O.S. CRUCERO ✦<br>Tecla ← → para pasar página · Escape para volver a la misión · Las notas se guardan en este dispositivo</div>
+  <div class="bib-footer">✦ COLEGIO SANTA MARÍA LA BLANCA · MADRID · S.O.S. CRUCERO ✦<br>Tecla ← → para pasar página · <strong>Volver a la misión</strong> o Escape · Las notas se guardan en este dispositivo</div>
 </div>
 
 <script>
@@ -1184,20 +1346,34 @@
     showPage(bibCurrent + d);
   }
 
+  function volverAMision() {
+    persistBibNow();
+    try {
+      if (window.parent && window.parent !== window) {
+        window.parent.postMessage('close-bitacora', '*');
+        return;
+      }
+    } catch (err) {}
+    var base = 'index.html';
+    try {
+      base = new URL('index.html', window.location.href).pathname;
+    } catch (e2) {}
+    window.location.href = base;
+  }
+
   document.addEventListener('keydown', function (e) {
     if (e.target.closest('input') || e.target.closest('select') || e.target.closest('textarea')) return;
     if (e.key === 'ArrowLeft') { e.preventDefault(); showPageRelative(-1); }
     if (e.key === 'ArrowRight') { e.preventDefault(); showPageRelative(1); }
     if (e.key === 'Escape') {
       e.preventDefault();
-      try {
-        if (window.parent && window.parent !== window) window.parent.postMessage('close-bitacora', '*');
-      } catch (err) {}
+      volverAMision();
     }
   });
 
   document.getElementById('bib-prev').addEventListener('click', function () { showPageRelative(-1); });
   document.getElementById('bib-next').addEventListener('click', function () { showPageRelative(1); });
+  document.getElementById('bib-volver').addEventListener('click', volverAMision);
 
   document.addEventListener('input', function (e) {
     if (e.target && e.target.dataset && e.target.dataset.bibId) schedulePersist();
