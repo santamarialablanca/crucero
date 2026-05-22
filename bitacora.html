@@ -680,13 +680,13 @@
     <button type="button" class="tab-btn" data-page="7" onclick="showPage(7)">📡 P6 Morse</button>
     <button type="button" class="tab-btn" data-page="8" onclick="showPage(8)">🎏 P7 Banderines</button>
     <button type="button" class="tab-btn bib-hidden" data-page="9" onclick="showPage(9)">🔐 P8 Cifrados</button>
-    <button type="button" class="tab-btn" data-page="10" onclick="showPage(10)">🎡 P9 Timonel</button>
+    <button type="button" class="tab-btn" data-page="10" onclick="showPage(10)">🎡 P8 Timonel</button>
     <button type="button" class="tab-btn bib-hidden" data-page="11" onclick="showPage(11)">💡 P10 Señales</button>
-    <button type="button" class="tab-btn" data-page="12" onclick="showPage(12)">📋 Resumen</button>
+    <button type="button" class="tab-btn bib-hidden" data-page="12" onclick="showPage(12)">📋 Resumen</button>
   </div>
   <div class="book-toolbar" role="navigation" aria-label="Navegación del cuaderno">
     <button type="button" id="bib-prev" aria-label="Página anterior">◀ Anterior</button>
-    <span id="bib-counter" aria-live="polite">1 / 13</span>
+    <span id="bib-counter" aria-live="polite">1 / 10</span>
     <button type="button" id="bib-next" aria-label="Página siguiente">Siguiente ▶</button>
     <button type="button" class="btn-mision" id="bib-volver" aria-label="Volver a la misión de candados">⚓ Volver a la misión</button>
   </div>
@@ -741,7 +741,7 @@
         <br>
         <p>Encontramos su última transmisión de radio, fragmentada e incompleta. También hallamos este cuaderno de bitácora, repleto de mensajes cifrados y pistas que solo un verdadero marino puede descifrar.</p>
         <br>
-        <p>Tenéis exactamente <strong>40 minutos</strong> antes de que el barco entre en aguas imposibles. Debéis:</p>
+        <p>Tenéis exactamente <strong>40 minutos</strong> antes de que el barco entre en aguas imposibles. Debéis resolver las <strong>ocho pruebas</strong> del cuaderno:</p>
       </div>
       <div class="clue-box" style="margin-top: 8px;">
         <div class="typed" style="font-size: 12px; line-height: 1.8;">
@@ -752,13 +752,14 @@
           ☑ Prueba 5 — Mapa con coordenadas<br>
           ☑ Prueba 6 — Telégrafo en Morse<br>
           ☑ Prueba 7 — Banderines de colores<br>
-          <span class="bib-hidden">☑ Prueba 8 — Diario cifrado<br></span>
+          ☑ Prueba 8 — Rueda del timonel<br>
+          <span class="bib-hidden">☑ Prueba 8 — Diario cifrado<br>
           ☑ Prueba 9 — Rueda del timonel<br>
-          <span class="bib-hidden">☑ Prueba 10 — Señales de linterna</span>
+          ☑ Prueba 10 — Señales de linterna</span>
         </div>
       </div>
       <div class="alert-box">
-        📖 Todas las pistas visuales están en las páginas de este cuaderno. Introducid cada código en los <strong>candados digitales</strong> de la misión (misma pestaña o dispositivo del equipo).
+        📖 Las pistas están en las pestañas P1–P8 de este cuaderno. Introducid cada código en los <strong>candados digitales</strong> de la misión (<em>⚓ Volver a la misión</em>).
       </div>
       <div class="handwritten" style="font-size: 13px; color: var(--ink-fade); margin-top: 12px; font-style: italic;">
         — Bitácora del Primer Oficial, Raquel Cuesta
@@ -987,9 +988,9 @@
       <span class="page-num">8</span>
     </div>
 
-    <!-- PAGE 10: PRUEBA 9 TIMONEL -->
+    <!-- PAGE 10: PRUEBA 8 TIMONEL (candado digital #9) -->
     <div class="page" id="page-10">
-      <div class="heading-deco"><span></span><h3>PRUEBA 9 — LA RUEDA DEL TIMONEL</h3><span></span></div>
+      <div class="heading-deco"><span></span><h3>PRUEBA 8 — LA RUEDA DEL TIMONEL</h3><span></span></div>
       <div class="handwritten" style="font-size: 13px; line-height: 1.8; margin: 10px 0;">
         El timonel dejó un mensaje cifrado con <strong>ROT13</strong> (cada letra se desplaza 13 posiciones en el alfabeto). El mensaje está en el candado digital; aquí tenéis la clave del método.
       </div>
@@ -1004,7 +1005,7 @@
         ⭐ Esta es la <strong>última prueba activa</strong>. Al resolverla en el candado digital, ¡salvad el Santa María!
       </div>
       <div class="page-corner"></div>
-      <span class="page-num">9</span>
+      <span class="page-num">8</span>
     </div>
 
     <!-- PAGE 11: PRUEBA 10 SEÑALES (oculta — no eliminar) -->
@@ -1043,8 +1044,8 @@
       <span class="page-num">10</span>
     </div>
 
-    <!-- PAGE 12: RESUMEN -->
-    <div class="page" id="page-12">
+    <!-- PAGE 12: RESUMEN (oculta — no eliminar) -->
+    <div class="page bib-hidden" id="page-12">
       <div class="heading-deco"><span></span><h3>RESUMEN — LAS OCHO PRUEBAS</h3><span></span></div>
       <div class="alert-box">📖 Cuaderno de consulta. Los códigos se resuelven e introducen solo en los <strong>candados digitales</strong> de la misión (<em>⚓ Volver a la misión</em>).</div>
       <table class="coords-table" style="margin-top: 10px;">
@@ -1057,7 +1058,7 @@
         <tr><td>6</td><td>Código Morse</td><td>Texto · 7 letras</td><td>P6</td></tr>
         <tr><td>7</td><td>Banderines</td><td>Número · 5 cifras</td><td>P7</td></tr>
         <tr class="bib-hidden"><td>8</td><td>Diario cifrado</td><td>Número · 3 cifras</td><td>P8</td></tr>
-        <tr><td>9</td><td>Rueda del timonel</td><td>Texto · 6 letras</td><td>P9</td></tr>
+        <tr><td>8</td><td>Rueda del timonel</td><td>Texto · 6 letras</td><td>P8</td></tr>
         <tr class="bib-hidden"><td>10</td><td>Señales de linterna</td><td>Número · 4 cifras</td><td>P10</td></tr>
       </table>
       <div class="final-box" style="margin-top: 16px;">
@@ -1086,12 +1087,40 @@
 
 <script>
   const BIB_TOTAL = 13;
-  const BIB_HIDDEN_PAGES = new Set([9, 11]);
+  const BIB_HIDDEN_PAGES = new Set([9, 11, 12]);
   const BIB_STORAGE_KEY = 'smb_bitacora_v1';
   let bibCurrent = 0;
 
   function bibPageHidden(n) {
     return BIB_HIDDEN_PAGES.has(n);
+  }
+
+  function bibVisiblePages() {
+    var pages = [];
+    for (var i = 0; i < BIB_TOTAL; i++) {
+      if (!bibPageHidden(i)) pages.push(i);
+    }
+    return pages;
+  }
+
+  function bibVisiblePageOrdinal(n) {
+    var pages = bibVisiblePages();
+    var idx = pages.indexOf(n);
+    return idx < 0 ? 1 : idx + 1;
+  }
+
+  function bibHasVisibleBefore(n) {
+    for (var i = n - 1; i >= 0; i--) {
+      if (!bibPageHidden(i)) return true;
+    }
+    return false;
+  }
+
+  function bibHasVisibleAfter(n) {
+    for (var i = n + 1; i < BIB_TOTAL; i++) {
+      if (!bibPageHidden(i)) return true;
+    }
+    return false;
   }
 
   function bibClampPage(n, preferDir) {
@@ -1164,9 +1193,9 @@
     var prev = document.getElementById('bib-prev');
     var next = document.getElementById('bib-next');
     var ctr = document.getElementById('bib-counter');
-    if (prev) prev.disabled = n <= 0;
-    if (next) next.disabled = n >= BIB_TOTAL - 1;
-    if (ctr) ctr.textContent = (n + 1) + ' / ' + BIB_TOTAL;
+    if (prev) prev.disabled = !bibHasVisibleBefore(n);
+    if (next) next.disabled = !bibHasVisibleAfter(n);
+    if (ctr) ctr.textContent = bibVisiblePageOrdinal(n) + ' / ' + bibVisiblePages().length;
     persistBibNow();
   }
 
