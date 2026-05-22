@@ -249,6 +249,10 @@
     line-height: 1.55;
   }
 
+  .bib-hidden {
+    display: none !important;
+  }
+
   .pista-visual {
     background: var(--parchment-dark);
     border: 1px dashed var(--border-worn);
@@ -675,7 +679,7 @@
     <button type="button" class="tab-btn" data-page="6" onclick="showPage(6)">🗺️ P5 Mapa</button>
     <button type="button" class="tab-btn" data-page="7" onclick="showPage(7)">📡 P6 Morse</button>
     <button type="button" class="tab-btn" data-page="8" onclick="showPage(8)">🎏 P7 Banderines</button>
-    <button type="button" class="tab-btn" data-page="9" onclick="showPage(9)">🔐 P8 Cifrados</button>
+    <button type="button" class="tab-btn bib-hidden" data-page="9" onclick="showPage(9)">🔐 P8 Cifrados</button>
     <button type="button" class="tab-btn" data-page="10" onclick="showPage(10)">🎡 P9 Timonel</button>
     <button type="button" class="tab-btn" data-page="11" onclick="showPage(11)">💡 P10 Señales</button>
     <button type="button" class="tab-btn" data-page="12" onclick="showPage(12)">📋 Resumen</button>
@@ -748,7 +752,7 @@
           ☑ Prueba 5 — Mapa con coordenadas<br>
           ☑ Prueba 6 — Telégrafo en Morse<br>
           ☑ Prueba 7 — Banderines de colores<br>
-          ☑ Prueba 8 — Diario cifrado<br>
+          <span class="bib-hidden">☑ Prueba 8 — Diario cifrado<br></span>
           ☑ Prueba 9 — Rueda del timonel<br>
           ☑ Prueba 10 — Señales de linterna
         </div>
@@ -942,8 +946,8 @@
       <span class="page-num">7</span>
     </div>
 
-    <!-- PAGE 9: PRUEBA 8 CIFRADOS -->
-    <div class="page" id="page-9">
+    <!-- PAGE 9: PRUEBA 8 CIFRADOS (oculta — no eliminar) -->
+    <div class="page bib-hidden" id="page-9">
       <div class="heading-deco"><span></span><h3>PRUEBA 8 — EL DIARIO SECRETO</h3><span></span></div>
       <div class="handwritten" style="margin: 6px 0;">
         El capitán cifró tres palabras en su diario usando métodos distintos. Cada palabra da un número (cuenta sus letras). Los tres números forman el código.
@@ -1071,7 +1075,7 @@
         <tr><td>5</td><td>Mapa y coordenadas</td><td>Texto · 3 letras</td><td>P5</td></tr>
         <tr><td>6</td><td>Código Morse</td><td>Texto · 7 letras</td><td>P6</td></tr>
         <tr><td>7</td><td>Banderines</td><td>Número · 5 cifras</td><td>P7</td></tr>
-        <tr><td>8</td><td>Diario cifrado</td><td>Número · 3 cifras</td><td>P8</td></tr>
+        <tr class="bib-hidden"><td>8</td><td>Diario cifrado</td><td>Número · 3 cifras</td><td>P8</td></tr>
         <tr><td>9</td><td>Rueda del timonel</td><td>Texto · 6 letras</td><td>P9</td></tr>
         <tr><td>10</td><td>Señales de linterna</td><td>Número · 4 cifras</td><td>P10</td></tr>
       </table>
@@ -1087,7 +1091,7 @@
         <div class="prog-dot" data-lock="4" role="listitem" title="Candado 5"></div>
         <div class="prog-dot" data-lock="5" role="listitem" title="Candado 6"></div>
         <div class="prog-dot" data-lock="6" role="listitem" title="Candado 7"></div>
-        <div class="prog-dot" data-lock="7" role="listitem" title="Candado 8"></div>
+        <div class="prog-dot bib-hidden" data-lock="7" role="listitem" title="Candado 8"></div>
         <div class="prog-dot" data-lock="8" role="listitem" title="Candado 9"></div>
         <div class="prog-dot" data-lock="9" role="listitem" title="Candado 10"></div>
       </div>
@@ -1101,8 +1105,28 @@
 
 <script>
   const BIB_TOTAL = 13;
+  const BIB_HIDDEN_PAGES = new Set([9]);
   const BIB_STORAGE_KEY = 'smb_bitacora_v1';
   let bibCurrent = 0;
+
+  function bibPageHidden(n) {
+    return BIB_HIDDEN_PAGES.has(n);
+  }
+
+  function bibClampPage(n, preferDir) {
+    if (!bibPageHidden(n)) return n;
+    preferDir = preferDir || 1;
+    var step, cand;
+    for (step = 1; step < BIB_TOTAL; step++) {
+      cand = n + step * preferDir;
+      if (cand >= 0 && cand < BIB_TOTAL && !bibPageHidden(cand)) return cand;
+    }
+    for (step = 1; step < BIB_TOTAL; step++) {
+      cand = n - step * preferDir;
+      if (cand >= 0 && cand < BIB_TOTAL && !bibPageHidden(cand)) return cand;
+    }
+    return n;
+  }
 
   function loadBibSaved() {
     try {
@@ -1123,7 +1147,9 @@
     var i = lockIdx | 0;
     if (i < 0) i = 0;
     if (i > 9) i = 9;
-    return i + 2;
+    var page = i + 2;
+    if (bibPageHidden(page)) page = bibClampPage(page, 1);
+    return page;
   }
 
   function syncGameToDots(solved, lockIndex) {
@@ -1138,6 +1164,7 @@
   function showPage(n) {
     if (n < 0) n = 0;
     if (n >= BIB_TOTAL) n = BIB_TOTAL - 1;
+    if (bibPageHidden(n)) n = bibClampPage(n, n > bibCurrent ? 1 : -1);
     bibCurrent = n;
     document.querySelectorAll('.page').forEach(function (p) { p.classList.remove('active'); });
     document.querySelectorAll('.tab-btn').forEach(function (b) {
@@ -1163,7 +1190,9 @@
   }
 
   function showPageRelative(d) {
-    showPage(bibCurrent + d);
+    var n = bibCurrent + d;
+    while (n >= 0 && n < BIB_TOTAL && bibPageHidden(n)) n += d;
+    showPage(n);
   }
 
   function volverAMision() {
@@ -1209,6 +1238,7 @@
     var saved = loadBibSaved();
     var start = 0;
     if (saved && typeof saved.page === 'number' && saved.page >= 0 && saved.page < BIB_TOTAL) start = saved.page;
+    if (bibPageHidden(start)) start = bibClampPage(start, 1);
     showPage(start);
   });
 </script></body></html>

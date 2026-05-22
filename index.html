@@ -536,8 +536,8 @@ const LOCKS=[
   {id:5,type:"text",icon:"🗺️",title:"Las Escalas Secretas",sub:"Prueba 5 — Cuaderno de bitácora",story:"En el cuaderno (Prueba 5) hay un pergamino con tres coordenadas: 55°N/20°O, 40°N/2°E, 30°N/40°O. Localizadlas en el mapa de arriba, anotad cada letra y ordenadlas de mayor a menor latitud.",h1:"Tres coordenadas en el pergamino del cuaderno; buscadlas en el mapa.",h2:"Ordenad por latitud de norte a sur: 55°N, 40°N, 30°N.",h3:"Tres letras. Empieza por M.",answer:"MAR",len:3,success:"¡Coordenadas confirmadas! Quinta barrera eliminada.",color:"#1b4f72"},
   {id:6,type:"text",icon:"📡",title:"El Telégrafo del Capitán",sub:"Prueba 6 — Cuaderno de bitácora",story:"Descifrad el mensaje Morse de arriba con la tabla del cuaderno (Prueba 6). Cada grupo separado por espacio es una letra.",h1:"Cada grupo separado por espacio es una letra.",h2:"Los primeros grupos son N, E, P.",h3:"Nombre del dios romano del mar (7 letras).",answer:"NEPTUNO",len:7,success:"¡El dios del mar guía al Santa María! Sexta barrera destruida.",color:"#0b3d91"},
   {id:7,type:"number",icon:"🎏",title:"Los Banderines del Mástil",sub:"Prueba 7 — Cuaderno de bitácora",story:"En la driza de arriba hay 9 banderines (de izquierda a derecha). En el cuaderno (Prueba 7) está el código de colores.\nSolo los de posición IMPAR (1º, 3º, 5º, 7º, 9º).",h1:"Código en el cuaderno: rojo=1, azul=2, amarillo=3.",h2:"Solo posiciones impares: 1, 3, 5, 7, 9.",h3:"Orden de izquierda a derecha: 1, 3, 1, 3, 1.",answer:"13131",len:5,success:"¡Patrón descifrado! Séptima barrera eliminada.",color:"#7b2d8b"},
-  {id:8,type:"number",icon:"🔐",title:"El Diario Secreto",sub:"Prueba 8 — Cuaderno de bitácora",story:"Tres palabras cifradas en el cuaderno (Prueba 8). Contad sus letras:\n  A) Pigpen → 5 letras\n  B) ASCII (80 85 69 82 84 79) → 6 letras\n  C) Morse (··· / ·— / ·—·) → 3 letras",h1:"A) ANCLA (3). B) PUERTO (3).",h2:"C) PROA (2).",h3:"Código: 332.",answer:"332",len:3,success:"¡El diario revela los secretos! Octava barrera caída.",color:"#8b1a1a"},
-  {id:9,type:"text",icon:"🎡",title:"La Rueda del Timonel",sub:"Prueba 9 — Cuaderno de bitácora",story:"En el cuaderno (Prueba 9): ROT13 (A=N).\nMensaje cifrado: NAEGR",h1:"ROT13: desplazad 13 posiciones.",h2:"N=A, A=N, E=R, G=T, R=E.",h3:"La palabra descifrada tiene 6 letras.",answer:"VIENTO",len:6,success:"¡Rumbo confirmado! Novena barrera superada.",color:"#1a5276"},
+  {id:8,type:"number",icon:"🔐",title:"El Diario Secreto",sub:"Prueba 8 — Cuaderno de bitácora",story:"Tres palabras cifradas en el cuaderno (Prueba 8). Contad sus letras:\n  A) Pigpen → 5 letras\n  B) ASCII (80 85 69 82 84 79) → 6 letras\n  C) Morse (··· / ·— / ·—·) → 3 letras",h1:"A) ANCLA (3). B) PUERTO (3).",h2:"C) PROA (2).",h3:"Código: 332.",answer:"332",len:3,success:"¡El diario revela los secretos! Octava barrera caída.",color:"#8b1a1a",hidden:true},
+  {id:9,type:"text",icon:"🎡",title:"La Rueda del Timonel",sub:"Prueba 9 — Cuaderno de bitácora",story:"En el cuaderno (Prueba 9).\nMensaje cifrado: IUQZGB",h1:"ROT13: desplazad 13 posiciones.",h2:"N=A, A=N, E=R, G=T, R=E.",h3:"La palabra descifrada tiene 6 letras.",answer:"VIENTO",len:6,success:"¡Rumbo confirmado! Novena barrera superada.",color:"#1a5276"},
   {id:10,type:"number",icon:"💡",title:"Las Señales de la Linterna",sub:"Prueba 10 — Cuaderno de bitácora",story:"En el cuaderno (Prueba 10): Rojo=3, Amarillo=2, Verde=1.\nSec A: 🔴🟡🟢🔴🟢🟡\nSec B: 🟢🟢🟡🔴\nResultados con 0 en medio.",h1:"Sumad cada secuencia.",h2:"A=12, B=7.",h3:"Código: 1207.",answer:"1207",len:4,success:"¡SISTEMA ACTIVADO! ¡EL SANTA MARÍA ESTÁ A SALVO!",color:"#b7950b",isFinal:true},
 ];
 
@@ -555,7 +555,17 @@ const hintPwOk={2:false,3:false};
 
 const $=id=>document.getElementById(id);
 const fmt=s=>{const m=Math.floor(s/60).toString().padStart(2,'0');const sc=(s%60).toString().padStart(2,'0');return m+':'+sc;};
-const accessible=i=>i===0||solved[i-1];
+const lockHidden=l=>!!l.hidden;
+const lockHiddenAt=i=>lockHidden(LOCKS[i]);
+const visibleLockCount=()=>LOCKS.filter(l=>!lockHidden(l)).length;
+const solvedVisibleCount=()=>LOCKS.filter((l,i)=>!lockHidden(l)&&solved[i]).length;
+const allVisibleSolved=()=>LOCKS.every((l,i)=>lockHidden(l)||solved[i]);
+function ensureHiddenLocksSkipped(){LOCKS.forEach((l,i)=>{if(lockHidden(l))solved[i]=true;});}
+function firstVisibleIndex(){for(let i=0;i<LOCKS.length;i++)if(!lockHiddenAt(i))return i;return 0;}
+function prevVisibleIndex(from){for(let i=from-1;i>=0;i--)if(!lockHiddenAt(i))return i;return from;}
+function nextVisibleIndex(from){for(let i=from+1;i<LOCKS.length;i++)if(!lockHiddenAt(i))return i;return from;}
+function snapVisibleCur(i){if(!lockHiddenAt(i))return i;return nextVisibleIndex(i-1)<LOCKS.length?nextVisibleIndex(i-1):firstVisibleIndex();}
+const accessible=i=>{if(lockHiddenAt(i))return false;const p=prevVisibleIndex(i);return p<0||p===i||solved[p];};
 
 function firebaseCloudEnabled(){
   return typeof SMB_FIREBASE_DB_URL==='string'&&SMB_FIREBASE_DB_URL.length>8&&/^https:\/\//i.test(SMB_FIREBASE_DB_URL);
@@ -586,7 +596,7 @@ function syncCloudToFirebase(force){
   const gidSeg=safeFirebaseSegment(groupId);
   const url=base+'/'+SMB_FB_ROOT+'/'+roomSeg+'/teams/'+gidSeg+'.json';
   const nDone=solved.filter(Boolean).length;
-  const status=solved.every(Boolean)?'won':(timeLeft<=0?'lost':'playing');
+  const status=allVisibleSolved()?'won':(timeLeft<=0?'lost':'playing');
   const body=JSON.stringify({
     teamName:String(teamName||'').slice(0,80),
     cur,hintsUsed,timeLeft,done:nDone,status,
@@ -601,7 +611,8 @@ function saveGame(){try{localStorage.setItem(SAVE_KEY,JSON.stringify({cur,solved
 function loadSaved(){
   try{
     const d=JSON.parse(localStorage.getItem(SAVE_KEY)||'null');if(!d||d.timeLeft<=0)return;
-    cur=d.cur||0;solved=d.solved||Array(10).fill(false);timeLeft=d.timeLeft||GAME_DURATION_SEC;hintsUsed=d.hintsUsed||0;teamName=d.teamName||'';
+    cur=snapVisibleCur(d.cur||0);solved=d.solved||Array(10).fill(false);timeLeft=d.timeLeft||GAME_DURATION_SEC;hintsUsed=d.hintsUsed||0;teamName=d.teamName||'';
+    ensureHiddenLocksSkipped();
     groupId=d.groupId||'';
     if(!groupId)groupId=newGroupId();
     if(d.roomCode){try{localStorage.setItem(ROOM_STORAGE,d.roomCode);}catch(e){}if($('room-input'))$('room-input').value=d.roomCode;}
@@ -615,7 +626,7 @@ function loadSaved(){
   }catch(e){}
 }
 function clearSaved(){try{localStorage.removeItem(SAVE_KEY);}catch(e){}$('saved-notice').style.display='none';}
-function checkSaved(){try{const d=JSON.parse(localStorage.getItem(SAVE_KEY)||'null');if(d&&d.timeLeft>0&&!d.solved.every(Boolean))$('saved-notice').style.display='block';}catch(e){}}
+function checkSaved(){try{const d=JSON.parse(localStorage.getItem(SAVE_KEY)||'null');if(d&&d.timeLeft>0){const s=d.solved||[];const done=LOCKS.every((l,i)=>lockHidden(l)||s[i]);if(!done)$('saved-notice').style.display='block';}}catch(e){}}
 
 // ══ LEADERBOARD ══════════════════════════════════
 function getLB(){try{return JSON.parse(localStorage.getItem(LB_KEY)||'[]');}catch(e){return[];}}
@@ -805,7 +816,7 @@ function closeTPanel(){
 function checkPass(){
   if(($('t-pass').value||'').toUpperCase()===TEACHER_PASS){
     teacherAuth=true;$('t-auth').style.display='none';$('t-dash').style.display='block';
-    const sel=$('t-lock-sel');sel.innerHTML='';LOCKS.forEach((l,i)=>{const o=document.createElement('option');o.value=i;o.textContent='#'+(i+1)+' '+l.title;sel.appendChild(o);});
+    const sel=$('t-lock-sel');sel.innerHTML='';LOCKS.forEach((l,i)=>{if(lockHidden(l))return;const o=document.createElement('option');o.value=i;o.textContent='#'+l.id+' '+l.title;sel.appendChild(o);});
     refreshDash();startTeacherCloudPoll();
   } else {
     $('t-pass-err').style.display='block';setTimeout(()=>$('t-pass-err').style.display='none',2000);
@@ -814,9 +825,9 @@ function checkPass(){
 function refreshDash(){
   if(!teacherAuth)return;
   $('tp-team').textContent=teamName||'(sin equipo)';$('tp-time').textContent=fmt(timeLeft);
-  $('tp-solved').textContent=solved.filter(Boolean).length+'/10';$('tp-hints').textContent=hintsUsed;
+  $('tp-solved').textContent=solvedVisibleCount()+'/'+visibleLockCount();$('tp-hints').textContent=hintsUsed;
   const tpl=$('tp-locks');tpl.innerHTML='';
-  LOCKS.forEach((l,i)=>{
+  LOCKS.forEach((l,i)=>{if(lockHidden(l))return;
     const row=document.createElement('div');
     row.style.cssText='background:#08111e;border:1px solid #1a2e4a;border-radius:8px;padding:8px 11px;margin-bottom:6px;display:flex;justify-content:space-between;align-items:center;';
     const st=solved[i]?'✅':i===cur?'⏳':'⬜';const stc=solved[i]?'#27ae60':i===cur?'#f39c12':'#4a6a8a';
@@ -843,16 +854,16 @@ function startGame(){
   $('hdr-team').textContent=teamName+' · SMB';
   showFABs();sfxClick();
   groupId=newGroupId();
-  cur=0;solved=Array(10).fill(false);timeLeft=GAME_DURATION_SEC;hintsUsed=0;hintLevel=0;alarmFired=false;alarm5Fired=false;
-  resetHintPasswords();clearSaved();timerInt=setInterval(tick,1000);renderLock();saveGame();
+  cur=firstVisibleIndex();solved=Array(10).fill(false);timeLeft=GAME_DURATION_SEC;hintsUsed=0;hintLevel=0;alarmFired=false;alarm5Fired=false;
+  resetHintPasswords();ensureHiddenLocksSkipped();clearSaved();timerInt=setInterval(tick,1000);renderLock();saveGame();
 }
 
 function doRestart(){
   clearInterval(timerInt);stopMusic();clearSaved();
   ['s-timeout','s-victory'].forEach(id=>$(id).style.display='none');
   groupId=newGroupId();
-  cur=0;solved=Array(10).fill(false);timeLeft=GAME_DURATION_SEC;hintsUsed=0;hintLevel=0;alarmFired=false;alarm5Fired=false;
-  resetHintPasswords();
+  cur=firstVisibleIndex();solved=Array(10).fill(false);timeLeft=GAME_DURATION_SEC;hintsUsed=0;hintLevel=0;alarmFired=false;alarm5Fired=false;
+  resetHintPasswords();ensureHiddenLocksSkipped();
   const g=$('s-game');g.style.display='flex';g.style.flexDirection='column';
   timerInt=setInterval(tick,1000);renderLock();saveGame();
 }
@@ -879,21 +890,22 @@ function tick(){
 
 // ══ RENDER ═════════════════════════════════════
 function updateProgress(){
-  const n=solved.filter(Boolean).length;
-  $('prog-fill').style.width=(n/10*100)+'%';$('prog-label').textContent=n+'/10';$('st-solved').textContent=n+'/10';
+  const total=visibleLockCount(),n=solvedVisibleCount();
+  $('prog-fill').style.width=(total?n/total*100:0)+'%';$('prog-label').textContent=n+'/'+total;$('st-solved').textContent=n+'/'+total;
   // Rank
   const lb=getLB();const sc=n*10000-(GAME_DURATION_SEC-timeLeft)-hintsUsed*60;const pos=lb.filter(e=>e.score>sc).length+1;
   $('st-rank').textContent=lb.length?pos+'º':'—';
 }
 
 function renderLock(){
+  cur=snapVisibleCur(cur);
   const l=LOCKS[cur],isSolved=solved[cur],isLocked=!accessible(cur);
   hintLevel=0;['blocked-notice','error-toast'].forEach(id=>$(id).style.display='none');
   $('unlock-overlay').style.display='none';
   $('lock-card').style.borderColor=l.color+'44';
   $('lock-icon-box').style.background=l.color+'22';$('lock-icon-box').style.borderColor=l.color+'66';
   $('lock-icon-box').textContent=isSolved?'🔓':isLocked?'🔒':l.icon;
-  $('lock-num').textContent='CANDADO #'+l.id+' DE 10';
+  $('lock-num').textContent='CANDADO #'+l.id+' DE '+visibleLockCount();
   $('lock-title').textContent=l.title;$('lock-sub').textContent=l.sub;$('lock-story').textContent=l.story;
   $('solved-badge').style.display=isSolved?'inline':'none';
   $('locked-badge').style.display=isLocked?'inline':'none';
@@ -914,7 +926,7 @@ function renderLock(){
   if(l.id===7)renderBanderinesImage($('extra'));
   if(!isSolved&&!isLocked)renderKeypad(l);
   if(l.morse&&!isLocked)renderMorse(l.morse);
-  $('prev-btn').disabled=cur===0;$('next-btn').disabled=cur===LOCKS.length-1;
+  $('prev-btn').disabled=prevVisibleIndex(cur)===cur;$('next-btn').disabled=nextVisibleIndex(cur)===cur;
   updateProgress();renderDots();
   postBitacoraGameState({navigate:false});
 }
@@ -982,16 +994,17 @@ function confirmAnswer(){
   const inp=$('main-input');if(!inp)return;let val=inp.value.trim().toUpperCase();const l=LOCKS[cur];if(!val){inp.focus();return;}
   if(l.type==='direction'&&l.aliases&&l.aliases[val])val=l.aliases[val];
   if(val===l.answer.toUpperCase()){
-    solved[cur]=true;saveGame();
+    solved[cur]=true;ensureHiddenLocksSkipped();saveGame();
     $('input-area').style.display='none';$('solved-state').style.display='block';
     $('solved-badge').style.display='inline';$('locked-badge').style.display='none';
     $('lock-icon-box').textContent='🔓';$('hints-panel').style.display='none';$('error-toast').style.display='none';
     updateProgress();renderDots();sfxUnlock();
     $('unlock-msg').textContent=l.success;$('unlock-inner').style.borderColor=l.color;
-    if(cur<LOCKS.length-1){$('unlock-next').style.display='block';$('unlock-next').textContent='→ Siguiente: candado #'+(cur+2);}else $('unlock-next').style.display='none';
+    const nx=nextVisibleIndex(cur);
+    if(nx>cur){$('unlock-next').style.display='block';$('unlock-next').textContent='→ Siguiente: candado #'+LOCKS[nx].id;}else $('unlock-next').style.display='none';
     $('unlock-overlay').style.display='flex';
     setTimeout(()=>$('unlock-overlay').style.display='none',2800);
-    if(l.isFinal||solved.every(Boolean))setTimeout(showVictory,3200);
+    if(l.isFinal||allVisibleSolved())setTimeout(showVictory,3200);
   } else {
     sfxError();inp.classList.add('shaking');
     $('error-toast').style.display='block';$('error-toast').style.animation='none';
@@ -1053,12 +1066,17 @@ function showHint(){
 
 // ══ NAV ════════════════════════════════════════
 function navigate(dir){
-  const t=cur+dir;if(t<0||t>=LOCKS.length)return;
+  const t=dir>0?nextVisibleIndex(cur):prevVisibleIndex(cur);
+  if(t===cur)return;
   if(dir>0&&!solved[cur]){showBlockedNotice();return;}
   if(!accessible(t)){showBlockedNotice();return;}
   sfxClick();cur=t;renderLock();
 }
-function tryGoTo(i){if(!accessible(i)||(!solved[cur]&&i>cur)){showBlockedNotice();return;}sfxClick();cur=i;renderLock();}
+function tryGoTo(i){
+  if(lockHiddenAt(i))return;
+  if(!accessible(i)||(!solved[cur]&&i>cur)){showBlockedNotice();return;}
+  sfxClick();cur=i;renderLock();
+}
 function showBlockedNotice(){
   sfxError();const bn=$('blocked-notice');bn.style.display='block';bn.style.animation='none';
   requestAnimationFrame(()=>bn.style.animation='fadeIn .3s ease');setTimeout(()=>bn.style.display='none',3000);
@@ -1068,7 +1086,7 @@ function showBlockedNotice(){
 function renderDots(){
   [$('hdr-dots'),$('dot-nav')].forEach((container,idx)=>{
     container.innerHTML='';
-    LOCKS.forEach((l,i)=>{
+    LOCKS.forEach((l,i)=>{if(lockHidden(l))return;
       const isAcc=accessible(i),isSol=solved[i],isCur=i===cur;
       const color=isSol?'#27ae60':isCur?'#f39c12':isAcc?'#2d4a6e':'#141e2e';
       const size=idx===0?'11px':'9px';
@@ -1085,7 +1103,7 @@ function showTimeout(){
   sfxTimeout();syncCloudToFirebase(true);
   $('s-game').style.display='none';
   const ts=$('s-timeout');ts.style.display='flex';ts.style.flexDirection='column';ts.style.alignItems='center';ts.style.justifyContent='center';
-  $('to-solved').textContent=solved.filter(Boolean).length+'/10';$('to-hints').textContent=hintsUsed;
+  $('to-solved').textContent=solvedVisibleCount()+'/'+visibleLockCount();$('to-hints').textContent=hintsUsed;
   clearSaved();
 }
 
@@ -1104,14 +1122,14 @@ function spawnConfetti(){
 function showVictory(){
   clearInterval(timerInt);sfxVictory();
   const elapsed=GAME_DURATION_SEC-timeLeft;
-  addResult(teamName,elapsed,hintsUsed,10);
+  addResult(teamName,elapsed,hintsUsed,visibleLockCount());
   syncCloudToFirebase(true);
   clearSaved();
   $('s-game').style.display='none';
   const vs=$('s-victory');vs.style.display='flex';vs.style.flexDirection='column';vs.style.alignItems='center';vs.style.justifyContent='center';
   $('v-time').textContent=fmt(elapsed);$('v-hints').textContent=hintsUsed;
   $('v-team').textContent=teamName?'✦ '+teamName+' ✦':'';
-  const lb=getLB();const score=10*10000-elapsed-hintsUsed*60;const pos=lb.filter(e=>e.score>score).length+1;
+  const lb=getLB();const score=visibleLockCount()*10000-elapsed-hintsUsed*60;const pos=lb.filter(e=>e.score>score).length+1;
   $('v-pos').textContent=pos+'º';
   setTimeout(spawnConfetti,300);setTimeout(spawnConfetti,1800);
 }
