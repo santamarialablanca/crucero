@@ -281,7 +281,7 @@ function renderWave(active){
       </div>
       <div id="hdr-team" style="color:#4a6a8a;font-family:monospace;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Santa María la Blanca</div>
     </div>
-    <div id="timer" role="timer" aria-live="off" aria-atomic="true" aria-label="Tiempo restante" style="background:#0a1628;border:1.5px solid #4ecdc4;border-radius:8px;font-family:monospace;color:#4ecdc4;font-weight:bold;white-space:nowrap;transition:all .5s;flex-shrink:0;">⏱ 60:00</div>
+    <div id="timer" role="timer" aria-live="off" aria-atomic="true" aria-label="Tiempo restante" style="background:#0a1628;border:1.5px solid #4ecdc4;border-radius:8px;font-family:monospace;color:#4ecdc4;font-weight:bold;white-space:nowrap;transition:all .5s;flex-shrink:0;">⏱ 40:00</div>
     <div id="hdr-dots" style="display:flex;gap:2px;align-items:center;flex-wrap:wrap;justify-content:flex-end;flex-shrink:0;"></div>
   </div>
   <div class="game-progress" style="background:#06101e;border-bottom:1px solid #1a2e4a;display:flex;align-items:center;gap:10px;">
@@ -348,7 +348,7 @@ function renderWave(active){
     <div class="game-stats" style="margin-top:12px;display:flex;flex-wrap:wrap;justify-content:center;padding-top:10px;border-top:1px solid #1a2e4a;">
       <div style="text-align:center;"><div id="st-solved" class="stat-val" style="font-family:monospace;font-weight:bold;color:#27ae60;">0/10</div><div class="stat-lbl" style="font-family:monospace;color:#4a6a8a;margin-top:2px;">RESUELTOS</div></div>
       <div style="text-align:center;"><div id="st-hints" class="stat-val" style="font-family:monospace;font-weight:bold;color:#f39c12;">0</div><div class="stat-lbl" style="font-family:monospace;color:#4a6a8a;margin-top:2px;">PISTAS</div></div>
-      <div style="text-align:center;"><div id="st-time" class="stat-val" style="font-family:monospace;font-weight:bold;color:#4ecdc4;">60:00</div><div class="stat-lbl" style="font-family:monospace;color:#4a6a8a;margin-top:2px;">TIEMPO</div></div>
+      <div style="text-align:center;"><div id="st-time" class="stat-val" style="font-family:monospace;font-weight:bold;color:#4ecdc4;">40:00</div><div class="stat-lbl" style="font-family:monospace;color:#4a6a8a;margin-top:2px;">TIEMPO</div></div>
       <div style="text-align:center;cursor:pointer;" onclick="openLeaderboard()"><div id="st-rank" class="stat-val" style="font-family:monospace;font-weight:bold;color:#f1c40f;">—</div><div class="stat-lbl" style="font-family:monospace;color:#4a6a8a;margin-top:2px;">POSICIÓN</div></div>
     </div>
   </div>
@@ -533,7 +533,7 @@ const LOCKS=[
   {id:2,type:"number",icon:"🍾",title:"El Mensaje de las Botellas",sub:"Prueba 2 — Cuaderno de bitácora",story:"En el cuaderno (Prueba 2) hay botellas colgadas con etiquetas. Solo importan los dos colores del colegio (carmesí del escudo y azul marino de la vela). Comparad la altura de cada una y leed los números de sus etiquetas.",h1:"Solo las botellas del carmesí del escudo y del azul marino.",h2:"En cada tono, fijaos en cuál es más alta y cuál más baja.",h3:"Cuatro cifras en total. La más alta del azul marino lleva un 3 en la etiqueta.",answer:"3119",len:4,success:"¡Coordenadas del mástil confirmadas! Segunda barrera superada.",color:"#1b6ca8"},
   {id:3,type:"number",icon:"🪢",title:"Los Nudos del Contramaestre",sub:"Prueba 3 — Cuaderno de bitácora",story:"En el cuaderno (Prueba 3) hay una driza con seis banderines y un cuadro de referencia. Cada nudo tiene una operación. Identificad los seis nudos de izquierda a derecha y aplicad cada operación en orden sobre el número 10.",h1:"Usad el cuadro de nudos del cuaderno para reconocer cada uno.",h2:"Empezad en 10. Aplicad las seis operaciones, una tras otra, de izquierda a derecha.",h3:"El resultado final son dos cifras (pista: termina en 4).",answer:"28",len:2,success:"¡El contramaestre libre! Tercera barrera vencida.",color:"#2d6a4f"},
   {id:4,type:"direction",icon:"🧭",title:"La Ruta de la Brújula",sub:"Prueba 4 — Cuaderno de bitácora",story:"Usad la cuadrícula de arriba: el ancla ★ es el origen (centro). En el cuaderno (Prueba 4) está la ruta del capitán. Marcad cada paso en la cuadrícula y decidid en qué dirección quedáis respecto al inicio.",h1:"Partid del ancla. Cada paso es una casilla: norte arriba, este a la derecha.",h2:"Tras la ruta estáis al norte Y al este del punto de partida.",h3:"Dirección noreste: NE.",answer:"NE",len:2,success:"¡Posición detectada! Cuarta barrera superada.",color:"#6b4226",dirs:["N","NE","E","SE","S","SO","O","NO"],aliases:{NORESTE:"NE",NORDESTE:"NE",NOROESTE:"NO",SURESTE:"SE",SUROESTE:"SO",NORTE:"N",SUR:"S",ESTE:"E",OESTE:"O"}},
-  {id:5,type:"text",icon:"🗺️",title:"Las Escalas Secretas",sub:"Prueba 5 — Cuaderno de bitácora",story:"En el mapa del cuaderno (Prueba 5) hay tres marcas con coordenadas: 40°N/4°O, 51°N/0°, 48°N/2°E.\nLeed las letras de mayor a menor latitud.",h1:"Tres marcas en el mapa del cuaderno.",h2:"Ordenad: 51°N, 48°N, 40°N.",h3:"Tres letras. Empieza por M.",answer:"MAR",len:3,success:"¡Coordenadas confirmadas! Quinta barrera eliminada.",color:"#1b4f72"},
+  {id:5,type:"text",icon:"🗺️",title:"Las Escalas Secretas",sub:"Prueba 5 — Cuaderno de bitácora",story:"En el cuaderno (Prueba 5) hay un pergamino con tres coordenadas: 55°N/20°O, 40°N/2°E, 30°N/40°O. Localizadlas en el mapa de arriba, anotad cada letra y ordenadlas de mayor a menor latitud.",h1:"Tres coordenadas en el pergamino del cuaderno; buscadlas en el mapa.",h2:"Ordenad por latitud de norte a sur: 55°N, 40°N, 30°N.",h3:"Tres letras. Empieza por M.",answer:"MAR",len:3,success:"¡Coordenadas confirmadas! Quinta barrera eliminada.",color:"#1b4f72"},
   {id:6,type:"text",icon:"📡",title:"El Telégrafo del Capitán",sub:"Prueba 6 — Cuaderno de bitácora",story:"El radio-operador dejó el mensaje en el cuaderno (Prueba 6), en código Morse:",h1:"Cada grupo separado por espacio es una letra.",h2:"Los primeros grupos son N, E, P.",h3:"Nombre del dios romano del mar (7 letras).",answer:"NEPTUNO",len:7,success:"¡El dios del mar guía al Santa María! Sexta barrera destruida.",color:"#0b3d91",morse:"-. . .--. - ..- -. ---"},
   {id:7,type:"number",icon:"🎏",title:"Los Banderines del Mástil",sub:"Prueba 7 — Cuaderno de bitácora",story:"En el cuaderno (Prueba 7) hay 10 banderines. Rojo=1, Azul=2, Amarillo=3.\nSolo los de posición IMPAR (1º,3º,5º,7º,9º).",h1:"Solo posiciones impares: 1,3,5,7,9.",h2:"Pos1:rojo(1). Pos3:amarillo(3). Pos5:rojo(1).",h3:"Valores: 1,3,1,3,1. Código: 13131.",answer:"13131",len:5,success:"¡Patrón descifrado! Séptima barrera eliminada.",color:"#7b2d8b"},
   {id:8,type:"number",icon:"🔐",title:"El Diario Secreto",sub:"Prueba 8 — Cuaderno de bitácora",story:"Tres palabras cifradas en el cuaderno (Prueba 8). Contad sus letras:\n  A) Pigpen → 5 letras\n  B) ASCII (80 85 69 82 84 79) → 6 letras\n  C) Morse (··· / ·— / ·—·) → 3 letras",h1:"A) ANCLA (3). B) PUERTO (3).",h2:"C) PROA (2).",h3:"Código: 332.",answer:"332",len:3,success:"¡El diario revela los secretos! Octava barrera caída.",color:"#8b1a1a"},
@@ -546,9 +546,10 @@ const SAVE_KEY='sos_smb_v4';
 const LB_KEY='sos_smb_lb_v4';
 const TEACHER_PASS='CSMB2025';
 const ROOM_STORAGE='smb_room_code';
+const GAME_DURATION_SEC=40*60;
 
 // ══ STATE ═══════════════════════════════════════
-let cur=0,solved=Array(10).fill(false),timeLeft=3600,hintsUsed=0,hintLevel=0,timerInt=null,teamName='',alarmFired=false,alarm5Fired=false,teacherAuth=false,groupId='',lastCloudSync=0,tpCloudTimer=null;
+let cur=0,solved=Array(10).fill(false),timeLeft=GAME_DURATION_SEC,hintsUsed=0,hintLevel=0,timerInt=null,teamName='',alarmFired=false,alarm5Fired=false,teacherAuth=false,groupId='',lastCloudSync=0,tpCloudTimer=null;
 const HINT_PASSWORDS={2:'GRUMETE',3:'ALMIRANTE'};
 const hintPwOk={2:false,3:false};
 
@@ -600,7 +601,7 @@ function saveGame(){try{localStorage.setItem(SAVE_KEY,JSON.stringify({cur,solved
 function loadSaved(){
   try{
     const d=JSON.parse(localStorage.getItem(SAVE_KEY)||'null');if(!d||d.timeLeft<=0)return;
-    cur=d.cur||0;solved=d.solved||Array(10).fill(false);timeLeft=d.timeLeft||3600;hintsUsed=d.hintsUsed||0;teamName=d.teamName||'';
+    cur=d.cur||0;solved=d.solved||Array(10).fill(false);timeLeft=d.timeLeft||GAME_DURATION_SEC;hintsUsed=d.hintsUsed||0;teamName=d.teamName||'';
     groupId=d.groupId||'';
     if(!groupId)groupId=newGroupId();
     if(d.roomCode){try{localStorage.setItem(ROOM_STORAGE,d.roomCode);}catch(e){}if($('room-input'))$('room-input').value=d.roomCode;}
@@ -683,6 +684,9 @@ function renderNudosImage(container){
 }
 function renderCuadriculaImage(container){
   renderLockClueImage(container,'── Cuadrícula de navegación (prueba 4) ──','img/04cuadricula.png','Cuadrícula 10×10 con ancla en el centro y flechas de rumbo; marcas N, S, E y O');
+}
+function renderMapaImage(container){
+  renderLockClueImage(container,'── Mapa del mundo — escalas secretas (prueba 5) ──','img/05mapa.png','Mapa con longitud y latitud: marcas con letras y coordenadas');
 }
 function openBitacora(){
   if(typeof sfxClick==='function')sfxClick();
@@ -833,7 +837,7 @@ function startGame(){
   $('hdr-team').textContent=teamName+' · SMB';
   showFABs();sfxClick();
   groupId=newGroupId();
-  cur=0;solved=Array(10).fill(false);timeLeft=3600;hintsUsed=0;hintLevel=0;alarmFired=false;alarm5Fired=false;
+  cur=0;solved=Array(10).fill(false);timeLeft=GAME_DURATION_SEC;hintsUsed=0;hintLevel=0;alarmFired=false;alarm5Fired=false;
   resetHintPasswords();clearSaved();timerInt=setInterval(tick,1000);renderLock();saveGame();
 }
 
@@ -841,7 +845,7 @@ function doRestart(){
   clearInterval(timerInt);stopMusic();clearSaved();
   ['s-timeout','s-victory'].forEach(id=>$(id).style.display='none');
   groupId=newGroupId();
-  cur=0;solved=Array(10).fill(false);timeLeft=3600;hintsUsed=0;hintLevel=0;alarmFired=false;alarm5Fired=false;
+  cur=0;solved=Array(10).fill(false);timeLeft=GAME_DURATION_SEC;hintsUsed=0;hintLevel=0;alarmFired=false;alarm5Fired=false;
   resetHintPasswords();
   const g=$('s-game');g.style.display='flex';g.style.flexDirection='column';
   timerInt=setInterval(tick,1000);renderLock();saveGame();
@@ -872,7 +876,7 @@ function updateProgress(){
   const n=solved.filter(Boolean).length;
   $('prog-fill').style.width=(n/10*100)+'%';$('prog-label').textContent=n+'/10';$('st-solved').textContent=n+'/10';
   // Rank
-  const lb=getLB();const sc=n*10000-(3600-timeLeft)-hintsUsed*60;const pos=lb.filter(e=>e.score>sc).length+1;
+  const lb=getLB();const sc=n*10000-(GAME_DURATION_SEC-timeLeft)-hintsUsed*60;const pos=lb.filter(e=>e.score>sc).length+1;
   $('st-rank').textContent=lb.length?pos+'º':'—';
 }
 
@@ -899,6 +903,7 @@ function renderLock(){
   if(l.id===2)renderBotellasImage($('extra'));
   if(l.id===3)renderNudosImage($('extra'));
   if(l.id===4)renderCuadriculaImage($('extra'));
+  if(l.id===5)renderMapaImage($('extra'));
   if(!isSolved&&!isLocked)renderKeypad(l);
   if(l.morse&&!isLocked)renderMorse(l.morse);
   $('prev-btn').disabled=cur===0;$('next-btn').disabled=cur===LOCKS.length-1;
@@ -1090,7 +1095,7 @@ function spawnConfetti(){
 
 function showVictory(){
   clearInterval(timerInt);sfxVictory();
-  const elapsed=3600-timeLeft;
+  const elapsed=GAME_DURATION_SEC-timeLeft;
   addResult(teamName,elapsed,hintsUsed,10);
   syncCloudToFirebase(true);
   clearSaved();
