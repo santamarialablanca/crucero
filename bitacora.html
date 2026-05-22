@@ -681,7 +681,7 @@
     <button type="button" class="tab-btn" data-page="8" onclick="showPage(8)">🎏 P7 Banderines</button>
     <button type="button" class="tab-btn bib-hidden" data-page="9" onclick="showPage(9)">🔐 P8 Cifrados</button>
     <button type="button" class="tab-btn" data-page="10" onclick="showPage(10)">🎡 P9 Timonel</button>
-    <button type="button" class="tab-btn" data-page="11" onclick="showPage(11)">💡 P10 Señales</button>
+    <button type="button" class="tab-btn bib-hidden" data-page="11" onclick="showPage(11)">💡 P10 Señales</button>
     <button type="button" class="tab-btn" data-page="12" onclick="showPage(12)">📋 Resumen</button>
   </div>
   <div class="book-toolbar" role="navigation" aria-label="Navegación del cuaderno">
@@ -754,7 +754,7 @@
           ☑ Prueba 7 — Banderines de colores<br>
           <span class="bib-hidden">☑ Prueba 8 — Diario cifrado<br></span>
           ☑ Prueba 9 — Rueda del timonel<br>
-          ☑ Prueba 10 — Señales de linterna
+          <span class="bib-hidden">☑ Prueba 10 — Señales de linterna</span>
         </div>
       </div>
       <div class="alert-box">
@@ -1000,12 +1000,15 @@
       <div class="alert-box bib-candado-hint" style="margin-top: 12px;">
         ⚓ Descifrad el mensaje ROT13 del candado digital e introducid la palabra (texto, 6 letras).
       </div>
+      <div class="alert-box" style="margin-top: 12px;">
+        ⭐ Esta es la <strong>última prueba activa</strong>. Al resolverla en el candado digital, ¡salvad el Santa María!
+      </div>
       <div class="page-corner"></div>
       <span class="page-num">9</span>
     </div>
 
-    <!-- PAGE 11: PRUEBA 10 SEÑALES -->
-    <div class="page" id="page-11">
+    <!-- PAGE 11: PRUEBA 10 SEÑALES (oculta — no eliminar) -->
+    <div class="page bib-hidden" id="page-11">
       <div class="heading-deco"><span></span><h3>PRUEBA 10 — LAS SEÑALES DE LA LINTERNA</h3><span></span></div>
       <div class="handwritten" style="font-size: 13px; line-height: 1.8; margin: 10px 0;">
         El vigía de proa hizo señales con su linterna antes de que la tormenta lo silenciara. Cada color tiene un valor. Calculad las dos secuencias y obtendréis el código final.
@@ -1042,7 +1045,7 @@
 
     <!-- PAGE 12: RESUMEN -->
     <div class="page" id="page-12">
-      <div class="heading-deco"><span></span><h3>RESUMEN — LAS DIEZ PRUEBAS</h3><span></span></div>
+      <div class="heading-deco"><span></span><h3>RESUMEN — LAS OCHO PRUEBAS</h3><span></span></div>
       <div class="alert-box">📖 Cuaderno de consulta. Los códigos se resuelven e introducen solo en los <strong>candados digitales</strong> de la misión (<em>⚓ Volver a la misión</em>).</div>
       <table class="coords-table" style="margin-top: 10px;">
         <tr><th>#</th><th>Prueba</th><th>Candado en la misión</th><th>Página</th></tr>
@@ -1055,7 +1058,7 @@
         <tr><td>7</td><td>Banderines</td><td>Número · 5 cifras</td><td>P7</td></tr>
         <tr class="bib-hidden"><td>8</td><td>Diario cifrado</td><td>Número · 3 cifras</td><td>P8</td></tr>
         <tr><td>9</td><td>Rueda del timonel</td><td>Texto · 6 letras</td><td>P9</td></tr>
-        <tr><td>10</td><td>Señales de linterna</td><td>Número · 4 cifras</td><td>P10</td></tr>
+        <tr class="bib-hidden"><td>10</td><td>Señales de linterna</td><td>Número · 4 cifras</td><td>P10</td></tr>
       </table>
       <div class="final-box" style="margin-top: 16px;">
         <h3>⚓ SISTEMA DE EMERGENCIA ACTIVADO</h3>
@@ -1071,7 +1074,7 @@
         <div class="prog-dot" data-lock="6" role="listitem" title="Candado 7"></div>
         <div class="prog-dot bib-hidden" data-lock="7" role="listitem" title="Candado 8"></div>
         <div class="prog-dot" data-lock="8" role="listitem" title="Candado 9"></div>
-        <div class="prog-dot" data-lock="9" role="listitem" title="Candado 10"></div>
+        <div class="prog-dot bib-hidden" data-lock="9" role="listitem" title="Candado 10"></div>
       </div>
       <div class="page-corner"></div>
       <span class="page-num">XI</span>
@@ -1083,7 +1086,7 @@
 
 <script>
   const BIB_TOTAL = 13;
-  const BIB_HIDDEN_PAGES = new Set([9]);
+  const BIB_HIDDEN_PAGES = new Set([9, 11]);
   const BIB_STORAGE_KEY = 'smb_bitacora_v1';
   let bibCurrent = 0;
 
