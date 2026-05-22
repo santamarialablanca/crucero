@@ -62,7 +62,7 @@ input.team-input{color:#f39c12;border:1.5px solid #f39c1244;border-radius:8px;fo
 input.team-input:focus{border-color:#f39c12;box-shadow:0 0 10px rgba(243,156,18,.15);}
 input.shaking{animation:shake .45s ease;border-color:#e74c3c !important;box-shadow:0 0 12px rgba(231,76,60,.3) !important;}
 
-.screen{min-height:min(100vh,100dvh);min-height:600px;}
+.screen{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:min(100vh,100dvh);min-height:600px;width:100%;box-sizing:border-box;}
 .intro-wrap{width:min(760px,94vw);margin:0 auto;}
 .intro-card{width:100%;max-width:none;}
 .intro-eyebrow{font-size:.7rem !important;}
@@ -104,7 +104,9 @@ input.shaking{animation:shake .45s ease;border-color:#e74c3c !important;box-shad
 .game-stats{gap:clamp(14px,3vw,32px) !important;padding-top:14px !important;}
 .game-stats .stat-val{font-size:1rem !important;}
 .game-stats .stat-lbl{font-size:.7rem !important;}
-.end-wrap{width:min(720px,94vw);}
+.end-wrap{width:min(720px,94vw);max-width:100%;}
+.end-panel{width:min(720px,94vw);max-width:100%;margin:0 auto;padding:0 clamp(12px,3vw,24px);box-sizing:border-box;}
+#s-victory,#s-timeout{width:100%;max-width:none;}
 .end-title{font-size:clamp(1.65rem,3vw,2.1rem) !important;}
 
 #unlock-overlay{position:fixed;inset:0;z-index:500;display:none;align-items:center;justify-content:center;background:#00000099;backdrop-filter:blur(3px);}
@@ -355,7 +357,8 @@ function renderWave(active){
 </div>
 
 <!-- ══ TIMEOUT ════════════════════════════════════════ -->
-<div id="s-timeout" class="screen end-wrap" style="display:none;background:#030810;flex-direction:column;align-items:center;justify-content:center;padding:clamp(24px,4vw,48px);text-align:center;">
+<div id="s-timeout" class="screen" style="display:none;background:#030810;padding:clamp(24px,4vw,48px);text-align:center;">
+  <div class="end-panel" style="display:flex;flex-direction:column;align-items:center;">
   <div style="font-size:60px;margin-bottom:13px;filter:drop-shadow(0 0 16px #e74c3c88);">🌊</div>
   <div style="background:#ffffff0d;border:1px solid #e74c3c33;border-radius:8px;padding:4px 13px;margin-bottom:10px;font-size:10px;color:#e88;font-family:monospace;letter-spacing:2px;">✦ COLEGIO SANTA MARÍA LA BLANCA ✦</div>
   <h1 class="end-title" style="font-family:Georgia,serif;color:#e74c3c;text-shadow:0 0 22px #e74c3c88;margin:0 0 6px;">¡La tormenta ha llegado!</h1>
@@ -370,12 +373,13 @@ function renderWave(active){
     <button onclick="openLeaderboard()" class="restart-btn" style="background:#0f1f38;border-color:#f1c40f44;color:#f1c40f;">🏆 Marcador</button>
     <button onclick="goToIntro()" class="restart-btn" style="background:#0f1f38;border-color:#2d4a6e;color:#4ecdc4;">⚓ Inicio</button>
   </div>
+  </div>
 </div>
 
 <!-- ══ VICTORY ═══════════════════════════════════════════ -->
-<div id="s-victory" class="screen end-wrap" style="display:none;background:radial-gradient(ellipse at center,#0b2e1a 0%,#030810 100%);flex-direction:column;align-items:center;justify-content:center;padding:clamp(22px,4vw,48px);text-align:center;position:relative;overflow:hidden;">
+<div id="s-victory" class="screen" style="display:none;background:radial-gradient(ellipse at center,#0b2e1a 0%,#030810 100%);padding:clamp(22px,4vw,48px);text-align:center;position:relative;overflow:hidden;">
   <div id="confetti-container" style="position:absolute;inset:0;pointer-events:none;z-index:1;overflow:hidden;"></div>
-  <div style="position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;">
+  <div class="end-panel" style="position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;width:100%;">
     <div style="font-size:58px;margin-bottom:11px;">🏆</div>
     <div style="background:#ffffff0d;border:1px solid #f1c40f33;border-radius:8px;padding:4px 13px;margin-bottom:9px;font-size:10px;color:#c8b060;font-family:monospace;letter-spacing:2px;">✦ COLEGIO SANTA MARÍA LA BLANCA ✦</div>
     <h1 class="end-title" style="font-family:Georgia,serif;color:#f1c40f;text-shadow:0 0 22px #f1c40f88;margin:0 0 4px;">¡Misión completada!</h1>
@@ -1106,7 +1110,7 @@ function renderDots(){
 function showTimeout(){
   sfxTimeout();syncCloudToFirebase(true);
   $('s-game').style.display='none';
-  const ts=$('s-timeout');ts.style.display='flex';ts.style.flexDirection='column';ts.style.alignItems='center';ts.style.justifyContent='center';
+  const ts=$('s-timeout');ts.style.display='flex';
   $('to-solved').textContent=solvedVisibleCount()+'/'+visibleLockCount();$('to-hints').textContent=hintsUsed;
   clearSaved();
 }
@@ -1130,7 +1134,7 @@ function showVictory(){
   syncCloudToFirebase(true);
   clearSaved();
   $('s-game').style.display='none';
-  const vs=$('s-victory');vs.style.display='flex';vs.style.flexDirection='column';vs.style.alignItems='center';vs.style.justifyContent='center';
+  const vs=$('s-victory');vs.style.display='flex';
   $('v-time').textContent=fmt(elapsed);$('v-hints').textContent=hintsUsed;
   $('v-team').textContent=teamName?'✦ '+teamName+' ✦':'';
   const lb=getLB();const score=visibleLockCount()*10000-elapsed-hintsUsed*60;const pos=lb.filter(e=>e.score>score).length+1;
